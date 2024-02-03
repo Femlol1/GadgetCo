@@ -1,5 +1,5 @@
 const express = require('express');
-const espress = require ('express')
+const cors = require ('cors')
 const app = express();
 const http = require ('http');
 const server = http.createServer(app);
@@ -17,4 +17,6 @@ app.use(express.json());
 
 
 
-server.listen(8080, ()=> { })
+server.listen(8080, ()=> {
+    console.log('Server is running at port 8080')
+ })
