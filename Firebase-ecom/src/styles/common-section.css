@@ -1,0 +1,15 @@
+/* very important , there is an issue with the link here */
+.common__section {
+    background: linear-gradient(grey,grey), url('../assets/images/computer.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 100px 0px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+
+.common__section h1 {
+    color: #fff;
+    font-weight: 600;
+}
