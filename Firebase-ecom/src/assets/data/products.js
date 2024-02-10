@@ -7,10 +7,9 @@ import productImg05 from "../images/single-sofa-02.jpg";
 import productImg06 from "../images/single-sofa-03.jpg";
 import productImg007 from "../images/single-sofa-04.png";
 
-import productImg07 from "../images/arm-chair-01.jpg";
+import { default as productImg07, default as productImg10 } from "../images/arm-chair-01.jpg";
 import productImg08 from "../images/arm-chair-02.jpg";
 import productImg09 from "../images/arm-chair-03.jpg";
-import productImg10 from "../images/arm-chair-01.jpg";
 
 import productImg13 from "../images/phone-01.jpg";
 import productImg14 from "../images/phone-02.jpg";
@@ -30,23 +29,22 @@ import productImg25 from "../images/wireless-03.png";
 
 const products = [
   {
-    id: "01",
-    productName: "Stone and Beam Westview ",
-    imgUrl: productImg01,
-    category: "sofa",
-    price: 193,
-    shortDesc:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
-    reviews: [
+    "id": "01",
+    "productName": "Stone and Beam Westview",
+    "imgUrl": productImg01,
+    "category": "sofa",
+    "price": 193,
+    "shortDesc": "A luxurious and comfortable sofa, perfect for any living room or lounge area. Made with high-quality materials and crafted for durability.",
+    "description": "The Stone and Beam Westview sofa combines elegance with comfort, offering a premium seating experience. It features a sturdy frame, plush cushions, and a modern design that fits well with any home decor. The soft fabric is easy to clean and maintain, while the spacious seating allows for optimal relaxation. This sofa is not only a stylish addition to your home but also provides the perfect spot for entertaining guests or enjoying a quiet evening.",
+    "reviews": [
       {
-        rating: 4.7,
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      },
+        "rating": 4.7,
+        "text": "This sofa is incredibly comfortable and stylish! It fits perfectly in my living room and has become my favorite spot in the house."
+      }
     ],
-    avgRating: 4.5,
+    "avgRating": 4.5
   },
+  
 
   {
     id: "02",

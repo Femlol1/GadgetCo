@@ -1,0 +1,48 @@
+
+.product__details {
+    margin-top: 70px;
+
+}
+
+.product__details h2 {
+    font-style: 1.6rem;
+    margin-bottom: 10px;
+
+}
+
+.product__rating span i {
+    color: gold;
+}
+
+.product__rating p span {
+    color: gold;
+    font-weight: 500;
+}
+
+.product__price {
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.tab__wrapper {
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.active__tab {
+    font-weight: 600;
+}
+
+.tab__content p {
+    line-height: 30px;
+}
+.review__wrapper ul li span {
+    color: gold;
+    font-weight: 600;
+}
+
+.review__wrapper ul li p{
+    margin-top: 10px;
+}
