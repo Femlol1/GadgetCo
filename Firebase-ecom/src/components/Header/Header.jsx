@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { Container, Row } from 'reactstrap'
 import logo from '../../assets/images/eco-logo.png'
 import userIcon from '../../assets/images/user-icon.png'
@@ -28,6 +28,7 @@ const Header = () => {
     const headerRef = useRef(null)
     const totalQuantity = useSelector(state => state.cart.totalQuantity)
     const menuRef =useRef(null)
+    const navigate = useNavigate()
     const stickyHeaderFunction = () => {
         window.addEventListener('scroll', () => {
             if(document.body.scrollTop >80 || document.documentElement.scrollTop > 80){
@@ -41,7 +42,11 @@ const Header = () => {
         stickyHeaderFunction()
         return () => window.removeEventListener('scroll', stickyHeaderFunction)
     });
-    const menuToggle = () => menuRef.current.classList.toggle('active__menu')
+    const menuToggle = () => menuRef.current.classList.toggle('active__menu');
+
+    const navToCart  =()=>{
+        navigate('/cart')
+    }
     return <header className='header' ref={headerRef}>
         <Container>
             <Row>
@@ -66,12 +71,14 @@ const Header = () => {
                             <i class="ri-heart-line"></i>
                             <span className="badge">1</span>
                             </span>
-                        <span className='cart__icon'>
+                        <span className='cart__icon' onClick={navToCart}>
                             <i class="ri-shopping-bag-line"></i>
                             <span className="badge">{totalQuantity}</span>
                             </span>
                         <span>
-                            <motion.img whileTap={{ scale: 1.2}} src={userIcon} alt=''/>
+                            <div className="center__div">
+                                <motion.img whileTap={{ scale: 1.2}} src={userIcon} alt=''/>
+                            </div>
                             </span>
                             <div className="mobile__menu">
                         <span onClick={menuToggle}>

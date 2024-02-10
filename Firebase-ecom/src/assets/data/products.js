@@ -47,75 +47,72 @@ const products = [
   
 
   {
-    id: "02",
-    productName: "Rivet Bigelow Modern ",
-    imgUrl: productImg02,
-    category: "sofa",
-    price: 253,
-    shortDesc:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
-    reviews: [
+    "id": "02",
+    "productName": "Rivet Bigelow Modern",
+    "imgUrl": productImg02,
+    "category": "sofa",
+    "price": 253,
+    "shortDesc": "Elegant and sleek, this modern sofa blends comfort and style for the contemporary home. Its durable design ensures long-lasting use.",
+    "description": "The Rivet Bigelow Modern Sofa redefines your living space with its sophisticated design and exceptional comfort. Upholstered with premium fabric, this sofa offers a smooth, inviting texture and resilient cushioning. Its minimalist aesthetic is complemented by clean lines and a sturdy construction, making it an ideal choice for any modern interior. The Rivet Bigelow is not just a piece of furniture, but a statement of style and quality that will elevate the ambiance of your home.",
+    "reviews": [
       {
-        rating: 4.8,
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "rating": 4.8,
+        "text": "The sleek design and incredible comfort of this sofa have made it the highlight of my living room. It's both practical and chic."
       },
       {
-        rating: 4.8,
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      },
+        "rating": 4.8,
+        "text": "Absolutely love this sofa! It has a fantastic modern look, and it's so comfortable that it's hard to get up once you sit down."
+      }
     ],
-    avgRating: 4.7,
-  },
+    "avgRating": 4.7
+  }
+  ,
 
   {
-    id: "03",
-    productName: "Amazon Brand Modern Sofa",
-    imgUrl: productImg03,
-    category: "sofa",
-    price: 173,
-    shortDesc:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
-    reviews: [
+    "id": "03",
+    "productName": "Amazon Brand Modern ",
+    "imgUrl": productImg03,
+    "category": "sofa",
+    "price": 173,
+    "shortDesc": "Discover the perfect blend of style and functionality with our modern sofa, featuring a versatile design to fit any room decor.",
+    "description": "This Amazon Brand Modern Sofa is the ideal addition to any contemporary living space. With a focus on comfort and style, this sofa is crafted with attention to detail and quality materials. The clean lines and modern silhouette are complemented by plush cushioning, providing both support and a cozy spot to unwind. The durable upholstery is easy to maintain, ensuring that the sofa retains its beauty over time. It's not just a sofa, it's a centerpiece that brings both elegance and comfort to your home.",
+    "reviews": [
       {
-        rating: 4.6,
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "rating": 4.6,
+        "text": "Very impressed with the quality and comfort of this sofa. It's become my go-to spot for relaxation and reading."
       },
       {
-        rating: 4.9,
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      },
+        "rating": 4.9,
+        "text": "This sofa exceeded my expectations! The modern design looks fantastic, and the comfort level is through the roof."
+      }
     ],
-    avgRating: 4.7,
+    "avgRating": 4.7
   },
+  
   {
-    id: "26",
-    productName: "Rivet Bigelow Modern ",
-    imgUrl: productImg02,
-    category: "sofa",
-    price: 253,
-    shortDesc:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur iure quas illo voluptates labore tempore!",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio nostrum accusantium iste, voluptas cumque provident! Consequatur officiis animi rem tempore voluptate cumque hic similique aperiam ut consectetur distinctio repudiandae quia quam quos, quas illo, iusto, necessitatibus odio veniam exercitationem quis voluptatibus debitis laboriosam! Esse debitis obcaecati blanditiis at impedit quibusdam!",
-    reviews: [
+    "id": "26",
+    "productName": "Rivet Bigelow Contemporary",
+    "imgUrl": productImg02,
+    "category": "sofa",
+    "price": 264,
+    "shortDesc": "Experience the ultimate in modern living with our contemporary sofa, designed to offer both style and supreme comfort.",
+    "description": "The Rivet Bigelow Contemporary Sofa is the epitome of modern living, providing a stylish and comfortable seating solution for any home. Crafted with a solid frame and high-density foam, this sofa is upholstered in a durable fabric that stands up to daily wear and tear. The sleek design features clean lines and a minimalist look that complements any decor. With ample seating space and a supportive back, this sofa is perfect for entertaining or simply relaxing after a long day.",
+    "reviews": [
       {
-        rating: 4.8,
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        "rating": 4.8,
+        "text": "I'm in love with the contemporary look of this sofa! It's not only gorgeous but also incredibly comfy and well-made."
       },
       {
-        rating: 4.8,
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      },
+        "rating": 4.8,
+        "text": "The best sofa I've ever owned. It fits perfectly with my modern decor and is the focal point of my living room."
+      }
     ],
-    avgRating: 4.7,
+    "avgRating": 4.7
   },
+  
   {
     id: "04",
-    productName: "Fllufy Sheep Sofa",
+    productName: "Fllufy Sheep",
     imgUrl: productImg04,
     category: "sofa",
     price: 163,
@@ -138,7 +135,7 @@ const products = [
 
   {
     id: "05",
-    productName: "Faux Velvet Sofa",
+    productName: "Faux Velvet",
     imgUrl: productImg05,
     category: "sofa",
     price: 163,
@@ -161,7 +158,7 @@ const products = [
 
   {
     id: "06",
-    productName: "Fllufy Sheep Sofa",
+    productName: "Fllufy Sheep",
     imgUrl: productImg06,
     category: "sofa",
     price: 163,
@@ -206,7 +203,7 @@ const products = [
 
   {
     id: "27",
-    productName: "Modern Arm Sofa",
+    productName: "Modern Arm",
     imgUrl: productImg007,
     category: "sofa",
     price: 173,

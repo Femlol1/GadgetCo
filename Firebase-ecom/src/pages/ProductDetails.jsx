@@ -1,21 +1,56 @@
 import { motion } from 'framer-motion'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { Col, Container, Row } from 'reactstrap'
 import products from '../assets/data/products'
 import Helmet from '../components/Helmet/helmet'
 import CommonSection from '../components/UI/CommonSection'
+import ProductsList from '../components/UI/ProductsList'
+import { cartActions } from '../redux/slices/cartSlice'
 import '../styles/product-details.css'
-
-
 
 const ProductDetails = () => {
 
-  const [tab,setTab] = useState('desc')
+  const [tab,setTab] = useState('desc');
+  const [rating, setRating] = useState(null);
+  const reviewUser = useRef('');
+  const reviewMsg = useRef('');
+  const dispatch = useDispatch();
+  const {id} = useParams();
+  const product =products.find(item=> item.id === id);
+  const {imgUrl, productName, price, avgRating, reviews, description,shortDesc, category } = product;
 
-  const {id} = useParams()
-  const product =products.find(item=> item.id === id)
-  const {imgUrl, productName, price, avgRating, reviews, description,shortDesc } = product
+  const relatedProducts = products.filter((item) => item.category === category);
+  const submitHandler =(e)=> {
+    e.preventDefault()
+
+    const reviewUserName = reviewUser.current.value;
+    const reviewUsermsg = reviewMsg.current.value;
+
+    const reviewObj = {
+      userName: reviewUserName,
+      text: reviewUsermsg,
+      rating,
+    };
+    console.log(reviewObj);
+    toast.success("Review submitted");
+  };
+  const addToCart =() => {
+    dispatch(cartActions.addItem({
+      id,
+      image:imgUrl,
+      productName,
+      price,
+    }));
+    toast.success('Item has been added to cart');
+  };
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  }, [product]);
+
+
   return <Helmet title={productName}>
     <CommonSection title={productName} />
     <section className='pt-0'>
@@ -36,9 +71,12 @@ const ProductDetails = () => {
                 </div>
                 <p>(<span>{avgRating}</span> ratings)</p>
               </div>
+              <div className='d-flex align-items-center gap-5'>
               <span className='product__price'>£{price}</span>
+              <span>Category: {category.toLowerCase()}</span>
+              </div>
               <p className='mt-3'>{shortDesc}</p>
-              <motion.button whileTap={{ scale: 1.2 }} className="buy__btn">Add to Cart</motion.button>
+              <motion.button whileTap={{ scale: 1.2 }} className="buy__btn" onClick={addToCart}>Add to Cart</motion.button>
             </div>
           </Col>
         </Row>
@@ -58,7 +96,7 @@ const ProductDetails = () => {
               tab==='desc' ? (<div className="tab__content mt-5">
               <p>{description}</p>
             </div>) : (<div className='Product__review'>
-              <div className="review__wrapper">
+              <div className="review__wrapper d-flex align-items-center gap-5"> {/* may need to remove text style*/}
                 <ul>
                   {
                     reviews?.map((item,index)=>(
@@ -71,26 +109,37 @@ const ProductDetails = () => {
                   }
                 </ul>
                 <div className="review__form">
-                  <form action="">
+                  <h4>Leave your experience</h4>
+                  <form action="" onSubmit={submitHandler}>
                     <div className="form__group">
-                      <input type="text" placeholder= 'Enter name'/>
+                      <input type="text" placeholder= 'Enter name' ref={reviewUser} required/>
+                    </div>
+                    <div className="form__group d-flex align-item-center gap-5 rating__group">
+                      <motion.span whileTap={{scale:1.2}} onClick={()=> setRating(1)}>1<i class='ri-star-s-fill'></i></motion.span>
+                      <motion.span whileTap={{scale:1.2}} onClick={()=> setRating(2)}>2<i class='ri-star-s-fill'></i></motion.span>
+                      <motion.span whileTap={{scale:1.2}} onClick={()=> setRating(3)}>3<i class='ri-star-s-fill'></i></motion.span>
+                      <motion.span whileTap={{scale:1.2}} onClick={()=> setRating(4)}>4<i class='ri-star-s-fill'></i></motion.span>
+                      <motion.span whileTap={{scale:1.2}} onClick={()=> setRating(5)}>5<i class='ri-star-s-fill'></i></motion.span>
                     </div>
                     <div className="form__group">
-                      <span>1<i class='ri-star-s-fill'></i></span>
-                      <span>2<i class='ri-star-s-fill'></i></span>
-                      <span>3<i class='ri-star-s-fill'></i></span>
-                      <span>4<i class='ri-star-s-fill'></i></span>
-                      <span>5<i class='ri-star-s-fill'></i></span>
+                      <textarea
+                      ref={reviewMsg}
+                      rows={4}
+                      type="text"
+                      placeholder= 'Review Message'
+                      required/>
                     </div>
-                    <div className="form__group">
-                      <input type="text" placeholder= 'Review Message'/>
-                    </div>
+                    <motion.button whileTap={{scale:1.2}} type='submit' className="buy__btn">Submit</motion.button>
                   </form>
                 </div>
               </div>
             </div>
             )}
           </Col>
+          <Col lg='12' className='mt-5'>
+            <h2 className="related__title">Related Products</h2>
+          </Col>
+          <ProductsList data={relatedProducts}/>
         </Row>
       </Container>
     </section>
