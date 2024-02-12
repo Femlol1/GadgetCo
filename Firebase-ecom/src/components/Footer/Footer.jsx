@@ -17,7 +17,7 @@ const Footer = () => {
           </div>
         </div>
           <p className="footer__text mt-4">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reiciendis minus tempora nulla sit eos repudiandae magnam consectetur quis recusandae saepe?
+            Discover innovative and cutting-edge technology products that fit your lifestyle. Our mission is to provide quality products that enhance your everyday experience.
           </p>
         </Col>
         <Col lg='3' md='3' className='mb-4'>
