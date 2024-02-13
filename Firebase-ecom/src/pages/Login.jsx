@@ -37,9 +37,16 @@ const Login = () => {
       <section>
         <Container>
           <Row>
-            <Col lg='6' className='m-auto text-center'>
+            {
+              loading ? (
+              <Col lg='12' className='text-center'>
+                <h5 className='fw-bold'>Loading':/|\'
+                </h5>
+              </Col>
+              ):(
+              <Col lg='6' className='m-auto text-center'>
               <h3 className='fw-bold mb-4'>Login</h3>
-              <Form className='auth__form'>
+              <Form className='auth__form' onSubmit={signIn}>
                 <FormGroup className='form__group'>
                   <input type="email" placeholder='Enter your email'
                   value={email} onChange={e => setEmail(e.target.value)}/>
@@ -52,6 +59,8 @@ const Login = () => {
                 <p>Don't have an account?{' '} <Link to='/signup'>Create an account</Link></p>
               </Form>
             </Col>
+              )
+            }
           </Row>
         </Container>
       </section>

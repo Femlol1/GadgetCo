@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion'
 import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { Container, Row } from 'reactstrap'
 import logo from '../../assets/images/eco-logo.png'
 import userIcon from '../../assets/images/user-icon.png'
+import useAuth from '../../custom-hooks/useAuth'
 import './header.css'
 
 
@@ -27,8 +28,11 @@ const nav__links = [
 const Header = () => {
     const headerRef = useRef(null)
     const totalQuantity = useSelector(state => state.cart.totalQuantity)
+    const profileActionRef = useRef(null)
     const menuRef =useRef(null)
     const navigate = useNavigate()
+    const {currentUser} = useAuth()
+
     const stickyHeaderFunction = () => {
         window.addEventListener('scroll', () => {
             if(document.body.scrollTop >80 || document.documentElement.scrollTop > 80){
@@ -47,6 +51,8 @@ const Header = () => {
     const navToCart  =()=>{
         navigate('/cart')
     }
+
+    const toggleProfileActions = () => profileActionRef.current.classList.toggle('show__profileActions')
     return <header className='header' ref={headerRef}>
         <Container>
             <Row>
@@ -75,11 +81,25 @@ const Header = () => {
                             <i class="ri-shopping-bag-line"></i>
                             <span className="badge">{totalQuantity}</span>
                             </span>
-                        <span>
-                            <div className="center__div">
-                                <motion.img whileTap={{ scale: 1.2}} src={userIcon} alt=''/>
+                            <div className="profile">
+                                <motion.img whileTap={{ scale: 1.2}} src={ currentUser? currentUser.photoURL : userIcon} 
+                                alt='' onClick={toggleProfileActions}/>
+                                {/*<p>{currentUser.displayName}</p>*/}
+                            
+                            <div
+                                className="profile__actions"
+                                ref={profileActionRef}
+                            >
+                                {
+                                    currentUser ? (<span>Logout</span>) :
+                                    (<div>
+                                        <Link to='/signup'>Signup</Link>
+                                        <Link to='/login'>Login</Link>
+                                    </div>
+                                )}
                             </div>
-                            </span>
+                            </div>
+                        
                             <div className="mobile__menu">
                         <span onClick={menuToggle}>
                             <i class="ri-menu-line"></i>
