@@ -7,7 +7,10 @@ import productImg05 from "../images/single-sofa-02.jpg";
 import productImg06 from "../images/single-sofa-03.jpg";
 import productImg007 from "../images/single-sofa-04.png";
 
-import { default as productImg07, default as productImg10 } from "../images/arm-chair-01.jpg";
+import {
+  default as productImg07,
+  default as productImg10,
+} from "../images/arm-chair-01.jpg";
 import productImg08 from "../images/arm-chair-02.jpg";
 import productImg09 from "../images/arm-chair-03.jpg";
 
@@ -29,87 +32,92 @@ import productImg25 from "../images/wireless-03.png";
 
 const products = [
   {
-    "id": "01",
-    "productName": "Stone and Beam Westview",
-    "imgUrl": productImg01,
-    "category": "sofa",
-    "price": 193,
-    "shortDesc": "A luxurious and comfortable sofa, perfect for any living room or lounge area. Made with high-quality materials and crafted for durability.",
-    "description": "The Stone and Beam Westview sofa combines elegance with comfort, offering a premium seating experience. It features a sturdy frame, plush cushions, and a modern design that fits well with any home decor. The soft fabric is easy to clean and maintain, while the spacious seating allows for optimal relaxation. This sofa is not only a stylish addition to your home but also provides the perfect spot for entertaining guests or enjoying a quiet evening.",
-    "reviews": [
+    id: "01",
+    productName: "Stone and Beam Westview",
+    imgUrl: productImg01,
+    category: "sofa",
+    price: 193,
+    shortDesc:
+      "A luxurious and comfortable sofa, perfect for any living room or lounge area. Made with high-quality materials and crafted for durability.",
+    description:
+      "The Stone and Beam Westview sofa combines elegance with comfort, offering a premium seating experience. It features a sturdy frame, plush cushions, and a modern design that fits well with any home decor. The soft fabric is easy to clean and maintain, while the spacious seating allows for optimal relaxation. This sofa is not only a stylish addition to your home but also provides the perfect spot for entertaining guests or enjoying a quiet evening.",
+    reviews: [
       {
-        "rating": 4.7,
-        "text": "This sofa is incredibly comfortable and stylish! It fits perfectly in my living room and has become my favorite spot in the house."
-      }
+        rating: 4.7,
+        text: "This sofa is incredibly comfortable and stylish! It fits perfectly in my living room and has become my favorite spot in the house.",
+      },
     ],
-    "avgRating": 4.5
+    avgRating: 4.5,
   },
-  
 
   {
-    "id": "02",
-    "productName": "Rivet Bigelow Modern",
-    "imgUrl": productImg02,
-    "category": "sofa",
-    "price": 253,
-    "shortDesc": "Elegant and sleek, this modern sofa blends comfort and style for the contemporary home. Its durable design ensures long-lasting use.",
-    "description": "The Rivet Bigelow Modern Sofa redefines your living space with its sophisticated design and exceptional comfort. Upholstered with premium fabric, this sofa offers a smooth, inviting texture and resilient cushioning. Its minimalist aesthetic is complemented by clean lines and a sturdy construction, making it an ideal choice for any modern interior. The Rivet Bigelow is not just a piece of furniture, but a statement of style and quality that will elevate the ambiance of your home.",
-    "reviews": [
+    id: "02",
+    productName: "Rivet Bigelow Modern",
+    imgUrl: productImg02,
+    category: "sofa",
+    price: 253,
+    shortDesc:
+      "Elegant and sleek, this modern sofa blends comfort and style for the contemporary home. Its durable design ensures long-lasting use.",
+    description:
+      "The Rivet Bigelow Modern Sofa redefines your living space with its sophisticated design and exceptional comfort. Upholstered with premium fabric, this sofa offers a smooth, inviting texture and resilient cushioning. Its minimalist aesthetic is complemented by clean lines and a sturdy construction, making it an ideal choice for any modern interior. The Rivet Bigelow is not just a piece of furniture, but a statement of style and quality that will elevate the ambiance of your home.",
+    reviews: [
       {
-        "rating": 4.8,
-        "text": "The sleek design and incredible comfort of this sofa have made it the highlight of my living room. It's both practical and chic."
+        rating: 4.8,
+        text: "The sleek design and incredible comfort of this sofa have made it the highlight of my living room. It's both practical and chic.",
       },
       {
-        "rating": 4.8,
-        "text": "Absolutely love this sofa! It has a fantastic modern look, and it's so comfortable that it's hard to get up once you sit down."
-      }
+        rating: 4.8,
+        text: "Absolutely love this sofa! It has a fantastic modern look, and it's so comfortable that it's hard to get up once you sit down.",
+      },
     ],
-    "avgRating": 4.7
-  }
-  ,
+    avgRating: 4.7,
+  },
+  {
+    id: "03",
+    productName: "Amazon Brand Modern ",
+    imgUrl: productImg03,
+    category: "sofa",
+    price: 173,
+    shortDesc:
+      "Discover the perfect blend of style and functionality with our modern sofa, featuring a versatile design to fit any room decor.",
+    description:
+      "This Amazon Brand Modern Sofa is the ideal addition to any contemporary living space. With a focus on comfort and style, this sofa is crafted with attention to detail and quality materials. The clean lines and modern silhouette are complemented by plush cushioning, providing both support and a cozy spot to unwind. The durable upholstery is easy to maintain, ensuring that the sofa retains its beauty over time. It's not just a sofa, it's a centerpiece that brings both elegance and comfort to your home.",
+    reviews: [
+      {
+        rating: 4.6,
+        text: "Very impressed with the quality and comfort of this sofa. It's become my go-to spot for relaxation and reading.",
+      },
+      {
+        rating: 4.9,
+        text: "This sofa exceeded my expectations! The modern design looks fantastic, and the comfort level is through the roof.",
+      },
+    ],
+    avgRating: 4.7,
+  },
 
   {
-    "id": "03",
-    "productName": "Amazon Brand Modern ",
-    "imgUrl": productImg03,
-    "category": "sofa",
-    "price": 173,
-    "shortDesc": "Discover the perfect blend of style and functionality with our modern sofa, featuring a versatile design to fit any room decor.",
-    "description": "This Amazon Brand Modern Sofa is the ideal addition to any contemporary living space. With a focus on comfort and style, this sofa is crafted with attention to detail and quality materials. The clean lines and modern silhouette are complemented by plush cushioning, providing both support and a cozy spot to unwind. The durable upholstery is easy to maintain, ensuring that the sofa retains its beauty over time. It's not just a sofa, it's a centerpiece that brings both elegance and comfort to your home.",
-    "reviews": [
+    id: "26",
+    productName: "Rivet Bigelow Contemporary",
+    imgUrl: productImg02,
+    category: "sofa",
+    price: 264,
+    shortDesc:
+      "Experience the ultimate in modern living with our contemporary sofa, designed to offer both style and supreme comfort.",
+    description:
+      "The Rivet Bigelow Contemporary Sofa is the epitome of modern living, providing a stylish and comfortable seating solution for any home. Crafted with a solid frame and high-density foam, this sofa is upholstered in a durable fabric that stands up to daily wear and tear. The sleek design features clean lines and a minimalist look that complements any decor. With ample seating space and a supportive back, this sofa is perfect for entertaining or simply relaxing after a long day.",
+    reviews: [
       {
-        "rating": 4.6,
-        "text": "Very impressed with the quality and comfort of this sofa. It's become my go-to spot for relaxation and reading."
+        rating: 4.8,
+        text: "I'm in love with the contemporary look of this sofa! It's not only gorgeous but also incredibly comfy and well-made.",
       },
       {
-        "rating": 4.9,
-        "text": "This sofa exceeded my expectations! The modern design looks fantastic, and the comfort level is through the roof."
-      }
-    ],
-    "avgRating": 4.7
-  },
-  
-  {
-    "id": "26",
-    "productName": "Rivet Bigelow Contemporary",
-    "imgUrl": productImg02,
-    "category": "sofa",
-    "price": 264,
-    "shortDesc": "Experience the ultimate in modern living with our contemporary sofa, designed to offer both style and supreme comfort.",
-    "description": "The Rivet Bigelow Contemporary Sofa is the epitome of modern living, providing a stylish and comfortable seating solution for any home. Crafted with a solid frame and high-density foam, this sofa is upholstered in a durable fabric that stands up to daily wear and tear. The sleek design features clean lines and a minimalist look that complements any decor. With ample seating space and a supportive back, this sofa is perfect for entertaining or simply relaxing after a long day.",
-    "reviews": [
-      {
-        "rating": 4.8,
-        "text": "I'm in love with the contemporary look of this sofa! It's not only gorgeous but also incredibly comfy and well-made."
+        rating: 4.8,
+        text: "The best sofa I've ever owned. It fits perfectly with my modern decor and is the focal point of my living room.",
       },
-      {
-        "rating": 4.8,
-        "text": "The best sofa I've ever owned. It fits perfectly with my modern decor and is the focal point of my living room."
-      }
     ],
-    "avgRating": 4.7
+    avgRating: 4.7,
   },
-  
+
   {
     id: "04",
     productName: "Fllufy Sheep",
