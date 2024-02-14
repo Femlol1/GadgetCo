@@ -33,7 +33,7 @@ The primary aim of this project is to design, develop, and deploy an AI-powered 
 7. **Advanced NLP and ML Techniques:**  
    Explore and implement advanced NLP and ML techniques, possibly including deep learning and reinforcement learning for chatbot optimisation.
 
-8. **Sentiment Analysis (for high-achieving students):**  
+8. **Sentiment Analysis:**  
    Implement sentiment analysis to gauge user emotions and potentially tailor the chatbot responses accordingly.
 
 9. **Documentation and Reporting:**  
