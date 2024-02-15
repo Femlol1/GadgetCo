@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.689db8b1.css",
-    "main.js": "/static/js/main.101413d8.js",
+    "main.css": "/static/css/main.8da337a5.css",
+    "main.js": "/static/js/main.833b2844.js",
     "static/media/single-sofa-01.jpg": "/static/media/single-sofa-01.db24b9feed7582c4e98d.jpg",
     "static/media/arm-chair-03.jpg": "/static/media/arm-chair-03.3249f382638c86196acd.jpg",
     "static/media/single-sofa-03.jpg": "/static/media/single-sofa-03.0d976c067034347df78d.jpg",
@@ -33,11 +33,11 @@
     "static/media/wireless-03.png": "/static/media/wireless-03.102199ac2c306820fe70.png",
     "static/media/wireless-01.png": "/static/media/wireless-01.1a76d777727c50ca0294.png",
     "index.html": "/index.html",
-    "main.689db8b1.css.map": "/static/css/main.689db8b1.css.map",
-    "main.101413d8.js.map": "/static/js/main.101413d8.js.map"
+    "main.8da337a5.css.map": "/static/css/main.8da337a5.css.map",
+    "main.833b2844.js.map": "/static/js/main.833b2844.js.map"
   },
   "entrypoints": [
-    "static/css/main.689db8b1.css",
-    "static/js/main.101413d8.js"
+    "static/css/main.8da337a5.css",
+    "static/js/main.833b2844.js"
   ]
 }
