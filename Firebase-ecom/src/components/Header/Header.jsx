@@ -78,7 +78,7 @@ const Header = () => {
 			<Container>
 				<Row>
 					<div className="nav__wrapper">
-						<div className="logo">
+						<div className="logo"  onClick={() => navigate('/home')}>
 							<img src={logo} alt="logo" />
 							<div>
 								<h1>GadgetCo</h1>
@@ -128,6 +128,7 @@ const Header = () => {
 										<div className=" d-flex align-items-center justify-content-center flex-column">
 											<Link to="/signup">SignUp</Link>
 											<Link to="/login">Login</Link>
+											<Link to="/dashboard">Dashboard</Link>
 										</div>
 									)}
 								</div>

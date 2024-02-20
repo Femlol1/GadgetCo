@@ -21,7 +21,7 @@ const Chatbot = () => {
       
       {
         id: '3',
-        message: 'Hi {previousValue}, nice to meet you',
+        message: 'Hi {previousValue}, nice to meet you, what can I do for you today?',
         end:true
       },
       
