@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { Col, Container, Row } from "reactstrap";
 import Helmet from "../components/Helmet/helmet";
 import CommonSection from "../components/UI/CommonSection";
+import ProductsList from "../components/UI/ProductsList";
 import useGetData from "../custom-hooks/useGetData";
 import { db } from "../firebase.config";
 import { cartActions } from "../redux/slices/cartSlice";
@@ -47,6 +48,8 @@ const ProductDetails = () => {
 		shortDesc,
 		category,
 	} = product;
+
+	const categoryLower = category?.toLowerCase() || "";
 
 	const relatedProducts = products.filter((item) => item.category === category);
 	const submitHandler = (e) => {
@@ -112,7 +115,8 @@ const ProductDetails = () => {
 								</div>
 								<div className="d-flex align-items-center gap-5">
 									<span className="product__price">£{price}</span>
-									<span>Category: {category.toLowerCase()}</span>
+									{/* Ensure category is displayed only when it's available */}
+									{category && <span>Category: {categoryLower}</span>}
 								</div>
 								<p className="mt-3">{shortDesc}</p>
 								<motion.button
@@ -143,7 +147,7 @@ const ProductDetails = () => {
 									className={`${tab === "rev" ? "active__tab" : ""}`}
 									onClick={() => setTab("rev")}
 								>
-									{/* Reviews ({reviews.length}) */}
+									Reviews
 								</h6>
 							</div>
 
@@ -233,7 +237,7 @@ const ProductDetails = () => {
 						<Col lg="12" className="mt-5">
 							<h2 className="related__title">Related Products</h2>
 						</Col>
-						{/* <ProductsList data={relatedProducts} /> */}
+						<ProductsList data={relatedProducts} />
 					</Row>
 				</Container>
 			</section>

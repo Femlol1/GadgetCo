@@ -21,7 +21,7 @@ const AllProducts = () => {
 						<thead>
 							<tr>
 								<th>Image</th>
-								<th>Title</th>
+								<th>Product Name</th>
 								<th>Category</th>
 								<th>Price</th>
 								<th>Action</th>
@@ -36,7 +36,7 @@ const AllProducts = () => {
 										<td>
 											<img src={item.imgUrl} alt="" />
 										</td>
-										<td>{item.title}</td>
+										<td>{item.productName}</td>
 										<td>{item.category}</td>
 										<td>£{item.price}</td>
 										<td>
