@@ -12,7 +12,7 @@ const admin__nav = [
 	},
 	{
 		display: "All-Products",
-		path: "/dashboar/all-products",
+		path: "/dashboard/all-products",
 	},
 	{
 		display: "Orders",
@@ -47,7 +47,7 @@ const AdminNav = () => {
 								<span>
 									<i class="ri-settings-2-line"></i>
 								</span>
-								<img src={currentUser.photoURL} alt="" />
+								<img src={currentUser && currentUser.photoURL} alt="" />
 							</div>
 						</div>
 					</Container>
@@ -60,7 +60,14 @@ const AdminNav = () => {
 							<ul className="admin__menu-list">
 								{admin__nav.map((item, index) => (
 									<li className="admin__menu-item" key={index}>
-										<NavLink to={item.path}>{item.display}</NavLink>
+										<NavLink
+											to={item.path}
+											className={(navClass) =>
+												navClass.isActive ? "active__admin-menu" : ""
+											}
+										>
+											{item.display}
+										</NavLink>
 									</li>
 								))}
 							</ul>
