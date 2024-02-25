@@ -52,7 +52,7 @@ const Header = () => {
 		signOut(auth)
 			.then(() => {
 				toast.success("Logged out");
-        navigate('/home')
+				navigate("/home");
 			})
 			.catch((err) => {
 				toast.error(err.message);
@@ -78,7 +78,7 @@ const Header = () => {
 			<Container>
 				<Row>
 					<div className="nav__wrapper">
-						<div className="logo"  onClick={() => navigate('/home')}>
+						<div className="logo" onClick={() => navigate("/home")}>
 							<img src={logo} alt="logo" />
 							<div>
 								<h1>GadgetCo</h1>
@@ -112,8 +112,9 @@ const Header = () => {
 							<div className="profile">
 								<motion.img
 									whileTap={{ scale: 1.2 }}
-									src={currentUser ? currentUser.photoURL : userIcon}
-									/*currentUser && currentUser.photoURL ? currentUser.photoURL : userIcon*/
+									src={
+										currentUser && currentUser ? currentUser.photoURL : userIcon
+									}
 									alt=""
 									onClick={toggleProfileActions}
 								/>
@@ -123,12 +124,14 @@ const Header = () => {
 									onClick={toggleProfileActions}
 								>
 									{currentUser ? (
-										<span onClick={logout}>Logout</span>
+										<div className=" d-flex align-items-center justify-content-center flex-column">
+											<span onClick={logout}>Logout</span>
+											<Link to="/dashboard">Dashboard</Link>
+										</div>
 									) : (
 										<div className=" d-flex align-items-center justify-content-center flex-column">
 											<Link to="/signup">SignUp</Link>
 											<Link to="/login">Login</Link>
-											<Link to="/dashboard">Dashboard</Link>
 										</div>
 									)}
 								</div>

@@ -88,7 +88,7 @@
 .nav__icons .profile .profile__actions {
 	position: absolute;
 	top: 98%;
-	left: 0;
+	left: 50%;
 	width: 150px;
 	z-index: 10;
 	padding: 15px;
@@ -99,11 +99,11 @@
 	line-height: 30px;
 	display: none;
 	cursor: pointer;
+	transform: translateX(-50%);
 }
 
 .show__profileActions {
 	display: block !important;
-	/* other styles for visible state */
 }
 
 .mobile__menu {
@@ -132,6 +132,10 @@
 }
 
 @media only screen and (max-width: 768px) {
+	.nav__icons .profile .profile__actions {
+		left: 50%; /* Start at half the width of the parent element */
+		transform: translateX(-50%); /* Center it horizontally */
+	}
 	.navigation {
 		position: fixed;
 		top: 0;
