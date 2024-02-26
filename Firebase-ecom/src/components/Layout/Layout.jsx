@@ -9,7 +9,7 @@ import Header from "../Header/Header";
 
 const theme = {
 	background: "#f5f8fb",
-	fontFamily: "Helvetica Neue",
+	fontFamily: "Montserrat",
 	headerBgColor: "#0a1d37",
 	headerFontColor: "#fff",
 	headerFontSize: "15px",
