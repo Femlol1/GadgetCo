@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.04375d75.css",
-    "main.js": "/static/js/main.66f3918e.js",
+    "main.js": "/static/js/main.208f807f.js",
     "static/media/single-sofa-01.jpg": "/static/media/single-sofa-01.db24b9feed7582c4e98d.jpg",
     "static/media/arm-chair-03.jpg": "/static/media/arm-chair-03.3249f382638c86196acd.jpg",
     "static/media/single-sofa-03.jpg": "/static/media/single-sofa-03.0d976c067034347df78d.jpg",
@@ -34,10 +34,10 @@
     "static/media/wireless-01.png": "/static/media/wireless-01.1a76d777727c50ca0294.png",
     "index.html": "/index.html",
     "main.04375d75.css.map": "/static/css/main.04375d75.css.map",
-    "main.66f3918e.js.map": "/static/js/main.66f3918e.js.map"
+    "main.208f807f.js.map": "/static/js/main.208f807f.js.map"
   },
   "entrypoints": [
     "static/css/main.04375d75.css",
-    "static/js/main.66f3918e.js"
+    "static/js/main.208f807f.js"
   ]
 }

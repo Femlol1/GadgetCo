@@ -8,7 +8,7 @@ const Clock = () => {
 	const [seconds, setSeconds] = useState(0);
 
 	const countdown = () => {
-		const destination = new Date("Feb 29, 2024 00:00:00").getTime();
+		const destination = new Date("Mar 14, 2024 00:00:00").getTime();
 		const interval = setInterval(() => {
 			const now = new Date().getTime();
 			const different = destination - now;

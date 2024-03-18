@@ -1,0 +1,146 @@
+{
+    "intents": [
+      {
+        "intent": "Greeting",
+        "examples": [
+          "Hi there",
+          "Hello",
+          "Good morning",
+          "Hey"
+        ],
+        "responses": [
+          "Hello! How can I help you today?",
+          "Hi, what can I assist you with?",
+          "Greetings! What do you need assistance with?"
+        ],
+        "context": ["general_welcome"],
+        "follow_up": ["Service_Inquiry", "Account_Inquiry"]
+      },
+      {
+        "intent": "Farewell",
+        "examples": [
+          "Goodbye",
+          "See you",
+          "Bye now",
+          "Catch you later"
+        ],
+        "responses": [
+          "Goodbye! If you have any more questions, just ask.",
+          "Farewell! Remember, we're here to help.",
+          "Bye! Don't hesitate to reach out again."
+        ],
+        "context": ["closing_conversation"],
+        "follow_up": []
+      },
+      {
+        "intent": "Account_Inquiry",
+        "examples": [
+          "Can't log in",
+          "Account access issue",
+          "Reset my password",
+          "Unlock my account"
+        ],
+        "responses": [
+          "To help with your account, I need your user ID or email.",
+          "I can assist with that. Do you have your account number handy?",
+          "Let's resolve this. Please provide some identification details."
+        ],
+        "context": ["account_support"],
+        "follow_up": ["Verify_Identity", "Resolve_Issue"],
+        "action": "account_verification"
+      },
+      {
+        "intent": "Order_Status",
+        "examples": [
+          "Order delivery time",
+          "Track my package",
+          "Has my order shipped yet?",
+          "Order confirmation details"
+        ],
+        "responses": [
+          "I can check your order status. May I have your order ID?",
+          "To find your order, I need the order number or your email.",
+          "Let's locate your order. Please provide the associated email or order ID."
+        ],
+        "context": ["order_inquiry"],
+        "follow_up": ["Provide_Order_Details", "More_Help"],
+        "action": "track_order"
+      },
+      {
+        "intent": "Feedback",
+        "examples": [
+          "Leave a review",
+          "Complaint about a service",
+          "Happy with the purchase",
+          "Unsatisfied with the product"
+        ],
+        "responses": [
+          "I'm here to listen. What would you like to share?",
+          "Your feedback is crucial. Please go ahead.",
+          "Let's hear it. Your satisfaction is our priority."
+        ],
+        "context": ["providing_feedback"],
+        "follow_up": ["Record_Feedback", "Additional_Comments"],
+        "action": "log_feedback"
+      },
+      {
+        "intent": "Verify_Identity",
+        "examples": [
+          "My user ID is...",
+          "Here's my email associated with my account.",
+          "Verification information"
+        ],
+        "responses": [
+          "Thank you. Let's verify that information.",
+          "Received. Verifying your details now.",
+          "Thanks. One moment while I check that."
+        ],
+        "context": ["verification_process"],
+        "action": "verify_user"
+      },
+      {
+        "intent": "Resolve_Issue",
+        "patterns": [
+          "I still can't access my account",
+          "The problem persists",
+          "Not resolved yet"
+        ],
+        "responses": [
+          "Let's try another approach. What issue remains?",
+          "I'm here to solve it. Describe what's still wrong.",
+          "We'll get this sorted out. What needs attention?"
+        ],
+        "context": ["problem_solving"],
+        "action": "issue_resolution"
+      }
+    ],
+    "entities": [
+      {
+        "entity": "order_number",
+        "regex": "[0-9]{5,10}",
+        "examples": [
+          "123456",
+          "987654"
+        ]
+      },
+      {
+        "entity": "email",
+        "regex": "\\S+@\\S+\\.\\S+",
+        "examples": [
+          "user@example.com",
+          "contact@domain.com"
+        ]
+      }
+    ],
+    "context_management": {
+      "Service_Inquiry": {
+        "set_context": ["service_details"],
+        "clear_context": ["general_welcome"]
+      },
+      "Account_Inquiry": {
+        "set_context": ["account_details"],
+        "clear_context": ["general_welcome"]
+      }
+    }
+  }
+  
