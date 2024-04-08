@@ -1,8 +1,8 @@
 {
     "intents": [
       {
-        "intent": "Greeting",
-        "examples": [
+        "tag": "Greeting",
+        "patterns": [
           "Hi there",
           "Hello",
           "Good morning",
@@ -17,8 +17,8 @@
         "follow_up": ["Service_Inquiry", "Account_Inquiry"]
       },
       {
-        "intent": "Farewell",
-        "examples": [
+        "tag": "Farewell",
+        "patterns": [
           "Goodbye",
           "See you",
           "Bye now",
@@ -33,8 +33,8 @@
         "follow_up": []
       },
       {
-        "intent": "Account_Inquiry",
-        "examples": [
+        "tag": "Account_Inquiry",
+        "patterns": [
           "Can't log in",
           "Account access issue",
           "Reset my password",
@@ -50,8 +50,8 @@
         "action": "account_verification"
       },
       {
-        "intent": "Order_Status",
-        "examples": [
+        "tag": "Order_Status",
+        "patterns": [
           "Order delivery time",
           "Track my package",
           "Has my order shipped yet?",
@@ -67,8 +67,8 @@
         "action": "track_order"
       },
       {
-        "intent": "Feedback",
-        "examples": [
+        "tag": "Feedback",
+        "patterns": [
           "Leave a review",
           "Complaint about a service",
           "Happy with the purchase",
@@ -84,8 +84,8 @@
         "action": "log_feedback"
       },
       {
-        "intent": "Verify_Identity",
-        "examples": [
+        "tag": "Verify_Identity",
+        "patterns": [
           "My user ID is...",
           "Here's my email associated with my account.",
           "Verification information"
@@ -99,7 +99,7 @@
         "action": "verify_user"
       },
       {
-        "intent": "Resolve_Issue",
+        "tag": "Resolve_Issue",
         "patterns": [
           "I still can't access my account",
           "The problem persists",
