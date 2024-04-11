@@ -1,65 +1,117 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
 
-.chat-icon {
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	font-size: 24px; /* Adjust the size as needed */
-	font-family: "Montserrat", sans-serif;
-	background-color: #007bff; /* Background color of the icon */
-	color: white; /* Icon color */
-	border-radius: 50%;
-	padding: 15px;
-	cursor: pointer;
-	z-index: 1000; /* Ensure it's above other content */
-}
-
+/* General chatbot styling */
 .chatbot {
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
-	width: 300px;
-	height: 400px;
-	border: 1px solid #ccc;
+	border: 1px solid #ddd;
 	border-radius: 10px;
-	background-color: #fff;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	background-color: #f9f9f9;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	transition: width 0.5s ease, height 0.5s ease;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	overflow: hidden;
 }
 
+/* Styling for the chatbot in compact mode */
+.chatbot.compact {
+	width: 300px;
+	height: 400px;
+}
+
+/* Styling for the chatbot in expanded mode */
+.chatbot.expanded {
+	width: 1200px;
+	height: 600px;
+}
+
+/* Chat messages area */
 .chat-messages {
+	flex-grow: 1;
 	padding: 10px;
 	overflow-y: auto;
+	background: white;
+	border-bottom: 1px solid #eee;
 }
 
+/* Individual message styling */
 .message {
-	margin-bottom: 10px;
-	padding: 5px;
-	border-radius: 5px;
-	background-color: #f1f1f1;
+	margin: 5px 0;
+	padding: 8px;
+	border-radius: 15px;
+	color: #333;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.4;
+	max-width: 80%;
 }
 
+/* User message styling */
 .message.user {
-	align-self: flex-end;
 	background-color: #dcf8c6;
+	align-self: flex-end;
 }
 
+/* Bot message styling */
+.message.bot {
+	background-color: #eaeaea;
+	align-self: flex-start;
+}
+
+/* Chat input area */
 .chat-input {
 	display: flex;
+	padding: 10px;
+	background: #fafafa;
+	border-top: 1px solid #eee;
 }
 
+/* Input field styling */
 .chat-input input {
 	flex: 1;
 	padding: 10px;
-	border: none;
-	border-top: 1px solid #ccc;
+	border: 1px solid #ddd;
+	border-radius: 20px;
+	margin-right: 10px;
+	font-family: Arial, sans-serif;
 }
 
+/* Send button styling */
 .chat-input button {
-	padding: 10px;
+	padding: 10px 20px;
 	border: none;
+	border-radius: 20px;
 	background-color: #007bff;
 	color: white;
+	cursor: pointer;
+	font-family: Arial, sans-serif;
+	transition: background-color 0.3s;
+}
+
+.chat-input button:hover {
+	background-color: #0056b3;
+}
+
+/* Resize button styling */
+.resize-button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	border: none;
+	background: #007bff;
+	color: white;
+	border-radius: 50%;
+	width: 80px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.resize-button:hover {
+	background-color: #0056b3;
 }

@@ -5,13 +5,15 @@ import random
 import nltk
 import numpy as np
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from keras.models import load_model
 from nltk.stem import WordNetLemmatizer
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS
 
 lemmatizer = WordNetLemmatizer()
-intents = json.loads(open('./intents_formatted.json').read())
+intents = json.loads(open('./intents.json').read())
 words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
 model = load_model('chatbot_model.h5')
@@ -49,13 +51,13 @@ def predict_class(sentence):
     return return_list
 
 def get_response(intents_list, intents_json):
+    if not intents_list:
+        return "I'm sorry, I do not understand."
     tag = intents_list[0]['intent']
     list_of_intents = intents_json['intents']
     for i in list_of_intents:
         if i['tag'] == tag:
-            result = random.choice(i['responses'])
-            break
-    return result
+            return random.choice(i['responses'])
 
 if __name__ == '__main__':
     app.run(port=5000)
