@@ -8,7 +8,8 @@
 	border: 1px solid #ddd;
 	border-radius: 10px;
 	background-color: #f9f9f9;
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	/* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); */
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow for 3D effect */
 	transition: width 0.5s ease, height 0.5s ease;
 	display: flex;
 	flex-direction: column;
@@ -96,22 +97,66 @@
 
 /* Resize button styling */
 .resize-button {
-	position: absolute;
-	top: 10px;
-	right: 10px;
+	top: 5px;
+	right: 5px;
 	border: none;
 	background: #007bff;
 	color: white;
-	border-radius: 50%;
-	width: 80px;
+	border-radius: 100%;
+	width: 30px;
 	height: 30px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
 	transition: background-color 0.3s;
+	margin-left: 10px; /* Adds spacing between buttons */
 }
 
 .resize-button:hover {
 	background-color: #0056b3;
+}
+.chatbot-header {
+	background-color: #2a9df4; /* Example blue background */
+	color: white; /* White text color */
+	text-align: left; /* Center the title text */
+	padding: 10px; /* Add some padding */
+	font-size: 20px; /* Increase font size */
+	font-weight: bold; /* Make the font bold */
+	border-top-left-radius: 10px; /* Rounded corners */
+	border-top-right-radius: 10px;
+	display: flex;
+	justify-content: space-between; /* Aligns items to the edges */
+	align-items: center; /* Center items vertically */
+	padding: 10px; /* Adjust padding as needed */
+	position: relative; /* Needed for absolute positioning of children if any */
+}
+.header-buttons {
+	display: flex; /* Display buttons in a row */
+	align-items: center;
+}
+.minimize-button {
+	right: 5px;
+	top: 5px;
+	border: none;
+	background: none;
+	cursor: pointer;
+	font-size: 16px;
+	color: white; /* Set a color for the icon */
+}
+.chatbot-icon {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background-color: #2a9df4;
+	color: white;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	font-size: 24px;
+	border: none;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

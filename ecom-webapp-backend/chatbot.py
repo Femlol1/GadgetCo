@@ -1,13 +1,20 @@
 import json
+import os
 import pickle
 import random
 
 import nltk
 import numpy as np
+import openai
+import requests
+from dotenv import load_dotenv
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from keras.models import load_model
 from nltk.stem import WordNetLemmatizer
+from textblob import TextBlob
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS
@@ -16,14 +23,22 @@ lemmatizer = WordNetLemmatizer()
 intents = json.loads(open('./intents.json').read())
 words = pickle.load(open('words.pkl', 'rb'))
 classes = pickle.load(open('classes.pkl', 'rb'))
-model = load_model('chatbot_model.h5')
+model = load_model('./chatbot_model.h5')
+chat_log = []
 
 @app.route('/get', methods=['POST'])
+
 def get_bot_response():
     message = request.json['message']
-    ints = predict_class(message)
-    res = get_response(ints, intents)
-    return jsonify({"response": res})
+    # Get predicted intents based on the input
+    predicted_intents = predict_class(message)
+    response = get_response(predicted_intents, intents, message)
+
+    # Log conversation for further improvement and debugging
+    chat_log.append({'role': 'user', 'content': message})
+    chat_log.append({'role': 'GadgetCo customer service assistant', 'content': response})
+    
+    return jsonify({"response": response})
 
 def clean_up_sentence(sentence):
     sentence_words = nltk.word_tokenize(sentence)
@@ -47,17 +62,60 @@ def predict_class(sentence):
     results.sort(key=lambda x: x[1], reverse=True)
     return_list = []
     for r in results:
-        return_list.append({'intent': classes[r[0]], 'probability': str(r[1])})
+        return_list.append({'intent': classes[r[0]], 'probability': float(r[1])})  # Convert probability to float
     return return_list
 
-def get_response(intents_list, intents_json):
-    if not intents_list:
-        return "I'm sorry, I do not understand."
-    tag = intents_list[0]['intent']
-    list_of_intents = intents_json['intents']
-    for i in list_of_intents:
-        if i['tag'] == tag:
-            return random.choice(i['responses'])
+# Update the get_response function to call GPT-3 as a fallback
+def get_response(intents_list, intents_json, message):
+    sentiment = get_sentiment(message)
+    if not intents_list or intents_list[0]['probability'] < 0.25:
+        response = get_gpt3_response(message)
+    else:
+        tag = intents_list[0]['intent']
+        responses = [i['responses'] for i in intents_json['intents'] if i['tag'] == tag][0]
+        if sentiment < -0.5:  # Highly negative sentiment
+            response = "I'm sorry to hear that. " + random.choice(responses)
+        else:
+            response = random.choice(responses)
+    return response
+        
+        
+def get_gpt3_response(message, chat_log=None):
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+
+    headers = {
+        'Authorization': f'Bearer {openai.api_key}',
+        'Content-Type': 'application/json',
+    }
+
+    data = {
+        'model': 'gpt-3.5-turbo',  # Specify the model you're using
+        'messages': [
+            {'role': 'system', 'content': 'You are a helpful assistant.'},
+            {'role': 'user', 'content': message},
+        ]
+    }
+
+    if chat_log:
+        data['messages'] = chat_log + data['messages']
+
+    response = requests.post('https://api.openai.com/v1/chat/completions', headers=headers, json=data)
+
+    if response.status_code == 200:
+        result = response.json()
+        messages = result['choices'][0]['message']['content']
+        return messages.strip()
+    else:
+        print(f"Error occurred: {response.status_code}: {response.text}")
+        # Return an empty string or a default message if the API call failed
+        return "I'm having trouble connecting to the server right now. (Error {response.status_code})"
+
+def get_sentiment(text):
+    testimonial = TextBlob(text)
+    return testimonial.sentiment.polarity 
 
 if __name__ == '__main__':
     app.run(port=5000)
+
+# neede to test the back end server
+# curl -X POST http://localhost:5000/get -H "Content-Type: application/json" -d "{\"message\": \"hello\"}"
