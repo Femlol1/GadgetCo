@@ -1,43 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.04375d75.css",
-    "main.js": "/static/js/main.208f807f.js",
-    "static/media/single-sofa-01.jpg": "/static/media/single-sofa-01.db24b9feed7582c4e98d.jpg",
-    "static/media/arm-chair-03.jpg": "/static/media/arm-chair-03.3249f382638c86196acd.jpg",
-    "static/media/single-sofa-03.jpg": "/static/media/single-sofa-03.0d976c067034347df78d.jpg",
-    "static/media/arm-chair-01.jpg": "/static/media/arm-chair-01.ec17d40c57ba24fe8783.jpg",
-    "static/media/single-sofa-02.jpg": "/static/media/single-sofa-02.c27d595e87065035a135.jpg",
-    "static/media/arm-chair-02.jpg": "/static/media/arm-chair-02.fb2852acd360d23eeb04.jpg",
+    "main.css": "/static/css/main.af3fa904.css",
+    "main.js": "/static/js/main.eedfbf76.js",
     "static/media/remixicon.svg?t=1590207869815": "/static/media/remixicon.1664a258a7e7714f6f8d.svg",
     "static/media/computer.jpg": "/static/media/computer.eb63e7919107aaefebe0.jpg",
-    "static/media/watch-04.jpg": "/static/media/watch-04.1fa3af75c78f4e1fe5ac.jpg",
-    "static/media/watch-03.jpg": "/static/media/watch-03.6a5a8f094142a79806e3.jpg",
-    "static/media/phone-06.jpg": "/static/media/phone-06.29ce26519b75270863b7.jpg",
     "static/media/remixicon.eot?t=1590207869815": "/static/media/remixicon.5cb99e6cba5a4619063f.eot",
     "static/media/remixicon.ttf?t=1590207869815": "/static/media/remixicon.f2616f597cf98f38d234.ttf",
-    "static/media/phone-04.jpg": "/static/media/phone-04.2ba19de791045813aac6.jpg",
-    "static/media/phone-02.jpg": "/static/media/phone-02.10477985f1c21ec02c4b.jpg",
-    "static/media/watch-01.jpg": "/static/media/watch-01.edc39b7f8f5435c24e41.jpg",
-    "static/media/double-sofa-02.png": "/static/media/double-sofa-02.eac56d9c3869030c478e.png",
     "static/media/hero-img.png": "/static/media/hero-img.4cb525f5d6bac4b5af39.png",
-    "static/media/double-sofa-01.png": "/static/media/double-sofa-01.183aaa8ba79a197491f7.png",
     "static/media/remixicon.woff?t=1590207869815": "/static/media/remixicon.8d09fa11700ed63cf96e.woff",
-    "static/media/double-sofa-03.png": "/static/media/double-sofa-03.afb74598f1e42c273506.png",
-    "static/media/phone-01.jpg": "/static/media/phone-01.d86035d9fda1b97694c9.jpg",
-    "static/media/single-sofa-04.png": "/static/media/single-sofa-04.980da5a130febb12ba74.png",
-    "static/media/phone-05.jpg": "/static/media/phone-05.31226bddeeca67231698.jpg",
-    "static/media/watch-02.jpg": "/static/media/watch-02.c68df91cf57fa2c349e6.jpg",
     "static/media/remixicon.woff2?t=1590207869815": "/static/media/remixicon.90668f6f9b3c2c18a090.woff2",
-    "static/media/phone-03.png": "/static/media/phone-03.3207c29a5ca1a8cd27cf.png",
     "static/media/counter-timer-img.png": "/static/media/counter-timer-img.11ac8dfe1f6734c62d2f.png",
-    "static/media/wireless-03.png": "/static/media/wireless-03.102199ac2c306820fe70.png",
-    "static/media/wireless-01.png": "/static/media/wireless-01.1a76d777727c50ca0294.png",
     "index.html": "/index.html",
-    "main.04375d75.css.map": "/static/css/main.04375d75.css.map",
-    "main.208f807f.js.map": "/static/js/main.208f807f.js.map"
+    "main.af3fa904.css.map": "/static/css/main.af3fa904.css.map",
+    "main.eedfbf76.js.map": "/static/js/main.eedfbf76.js.map"
   },
   "entrypoints": [
-    "static/css/main.04375d75.css",
-    "static/js/main.208f807f.js"
+    "static/css/main.af3fa904.css",
+    "static/js/main.eedfbf76.js"
   ]
 }

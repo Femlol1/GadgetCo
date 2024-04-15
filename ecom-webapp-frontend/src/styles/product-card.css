@@ -1,47 +1,89 @@
 .product__item {
-    cursor: pointer;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 350px; /* Fixed height for all product items */
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-.product__info h3{
-    font-size: 1.2rem;
-    color: var(--primary-color);
-    font-weight: 600;
-    margin-top: 15px;
+.product__img {
+	height: 200px; /* Fixed height for all images */
+	overflow: hidden;
+}
+
+.product__img img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	background: #fff;
+}
+
+.product__info {
+	height: 100px; /* Fixed height for the info section */
+	display: flex;
+	flex-direction: column;
+	justify-content: center; /* Center the text vertically */
+}
+
+.product__info h3 {
+	font-size: 1.2rem;
+	color: var(--primary-color);
+	font-weight: 600;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis; /* Prevents text overflow */
+	margin-top: 15px;
+}
+.product__info h3,
+.product__info span {
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* Limit text to two lines */
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
 .product__info a:hover {
-    color: inherit;
+	color: inherit;
 }
 
 .product__info span {
-    font-size: 0.9rem;
+	font-size: 0.9rem;
+	overflow: hidden; /* Prevents text overflow */
+	text-overflow: ellipsis;
+}
+.product__card-buttom {
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 10px;
 }
 
 .product__card-buttom .price {
-    color: var(--primary-color);
-    font-size: 1.3rem;
-    font-weight: 500;
-
+	color: var(--primary-color);
+	font-size: 1.3rem;
+	font-weight: 500;
 }
 
-.product__card-buttom span i{
-    font-size:1.2rem ;
-    padding: 5px;
-    background: var(--primary-color);
-    color: #fff;
-    border-radius: 50px;
+.product__card-buttom span i {
+	font-size: 1.2rem;
+	padding: 5px;
+	background: var(--primary-color);
+	color: #fff;
+	border-radius: 50px;
 }
 @media only screen and (max-width: 992px) {
-    .product__info h3 a {
-        font-size: 1.1rem;
-    }
+	.product__info h3 a {
+		font-size: 1.1rem;
+	}
 }
 
 @media only screen and (max-width: 768px) {
-    .product__info h3 a {
-        font-size: 1rem;
-    }
-    .product__card-buttom span i{
-        font-size: 1rem;
-    }
+	.product__info h3 a {
+		font-size: 1rem;
+	}
+	.product__card-buttom span i {
+		font-size: 1rem;
+	}
 }
