@@ -46,18 +46,18 @@
 	font-family: Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.4;
-	max-width: 80%;
+	max-width: 100%;
 }
 
 /* User message styling */
 .message.user {
-	background-color: #dcf8c6;
+	background-color: var(--card-bg-04);
 	align-self: flex-end;
 }
 
 /* Bot message styling */
 .message.bot {
-	background-color: #eaeaea;
+	background-color: var(--card-bg-02);
 	align-self: flex-start;
 }
 
@@ -81,9 +81,9 @@
 
 /* Send button styling */
 .chat-input button {
-	padding: 10px 20px;
+	padding: 10px 10px;
 	border: none;
-	border-radius: 20px;
+	border-radius: 10px;
 	background-color: var(--primary-color);
 	color: white;
 	cursor: pointer;
@@ -126,13 +126,13 @@
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	display: flex;
-	justify-content: space-between; /* Aligns items to the edges */
-	align-items: center; /* Center items vertically */
-	padding: 10px; /* Adjust padding as needed */
-	position: relative; /* Needed for absolute positioning of children if any */
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	position: relative;
 }
 .header-buttons {
-	display: flex; /* Display buttons in a row */
+	display: flex;
 	align-items: center;
 }
 .minimize-button {
