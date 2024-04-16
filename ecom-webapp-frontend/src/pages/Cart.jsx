@@ -5,7 +5,11 @@ import { Link } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
 import Helmet from "../components/Helmet/helmet";
 import CommonSection from "../components/UI/CommonSection";
-import { cartActions } from "../redux/slices/cartSlice";
+import {
+	decreaseQuantity,
+	deleteItem,
+	increaseQuantity,
+} from "../redux/slices/cartSlice";
 import "../styles/cart.css";
 
 const Cart = () => {
@@ -67,23 +71,46 @@ const Cart = () => {
 
 const CartTable = ({ item }) => {
 	const dispatch = useDispatch();
+
 	const deleteProduct = () => {
-		dispatch(cartActions.deleteItem(item.id));
+		dispatch(deleteItem(item.id));
+	};
+
+	const increaseQty = () => {
+		dispatch(increaseQuantity(item.id));
+	};
+
+	const decreaseQty = () => {
+		dispatch(decreaseQuantity(item.id));
 	};
 
 	return (
 		<tr>
 			<td>
-				<img src={item.imgUrl} alt="" />
+				<img
+					src={item.imgUrl}
+					alt={item.productName}
+					style={{ width: "50px" }}
+				/>
 			</td>
 			<td>{item.productName}</td>
 			<td>£{item.price}</td>
-			<td>{item.quantity}</td>
+			<td>
+				<div className="d-flex align-items-center">
+					<button onClick={decreaseQty} className="btn">
+						-
+					</button>
+					<span className="mx-2">{item.quantity}</span>
+					<button onClick={increaseQty} className="btn">
+						+
+					</button>
+				</div>
+			</td>
 			<td>
 				<motion.i
 					onClick={deleteProduct}
 					whileTap={{ scale: 1.2 }}
-					class="ri-delete-bin-line"
+					className="ri-delete-bin-line"
 				></motion.i>
 			</td>
 		</tr>

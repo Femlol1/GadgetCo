@@ -24,7 +24,8 @@ import ProductsList from "../components/UI/ProductsList";
 import useAuth from "../custom-hooks/useAuth";
 import useGetData from "../custom-hooks/useGetData";
 import { db } from "../firebase.config";
-import { cartActions } from "../redux/slices/cartSlice";
+import { addItem } from "../redux/slices/cartSlice";
+
 import "../styles/product-details.css";
 
 const ProductDetails = () => {
@@ -151,7 +152,7 @@ const ProductDetails = () => {
 	};
 	const addToCart = () => {
 		dispatch(
-			cartActions.addItem({
+			addItem({
 				id,
 				image: imgUrl,
 				productName,

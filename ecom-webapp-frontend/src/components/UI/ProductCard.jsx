@@ -4,7 +4,8 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Col } from "reactstrap";
-import { cartActions } from "../../redux/slices/cartSlice";
+import { addItem } from "../../redux/slices/cartSlice"; // Adjusted import
+
 import "../../styles/product-card.css";
 
 const ProductCard = ({ item }) => {
@@ -12,7 +13,7 @@ const ProductCard = ({ item }) => {
 
 	const addToCart = () => {
 		dispatch(
-			cartActions.addItem({
+			addItem({
 				id: item.id,
 				productName: item.productName,
 				price: item.price,
