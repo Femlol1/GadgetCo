@@ -1,7 +1,10 @@
-ecom-webapp-frontend/
+
 
 
 tests/
 *.psd
 *.pdf
 data/
+ecom-webapp-frontend/
+ecom-webapp-backend/Training.py
+ecom-webapp-backend/sameple_intents.json
