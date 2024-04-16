@@ -104,7 +104,7 @@ const Checkout = () => {
 										value={formData.country}
 									/>
 								</FormGroup>
-								<Button className="buy__btn auth__btn w-100" type="submit">
+								<Button className="buy__btn w-100" type="submit">
 									Place an order
 								</Button>
 							</Form>

@@ -63,30 +63,29 @@ const Signup = () => {
 			);
 			setLoading(false);
 			toast.success("Created Account");
-			navigate("/login");
+			navigate("/home");
 		} catch (error) {
 			setLoading(false);
 			toast.error("something went wrong");
 		}
-		
 	};
-  const handleFileValidation = (file) => {
-    if (!file) return; // Do nothing if no file is selected
+	const handleFileValidation = (file) => {
+		if (!file) return; // Do nothing if no file is selected
 
-    const fileType = file.type;
-    const validImageTypes = ["image/jpeg", "image/png", "image/gif"]; // Add more if needed
+		const fileType = file.type;
+		const validImageTypes = ["image/jpeg", "image/png", "image/gif"]; // Add more if needed
 
-    if (!validImageTypes.includes(fileType)) {
-      alert("Please choose a valid image file (JPEG, PNG, GIF).");
-      // Optionally, you can clear the file input field or perform other actions
-      // Here's an example to clear the file input:
-      document.getElementById("profilePicture").value = ""; // Clear the file input
-      return;
-    }
+		if (!validImageTypes.includes(fileType)) {
+			alert("Please choose a valid image file (JPEG, PNG, GIF).");
+			// Optionally, you can clear the file input field or perform other actions
+			// Here's an example to clear the file input:
+			document.getElementById("profilePicture").value = ""; // Clear the file input
+			return;
+		}
 
-    // Proceed with setting the file to state or other actions
-    setFile(file);
-  };
+		// Proceed with setting the file to state or other actions
+		setFile(file);
+	};
 
 	return (
 		<Helmet title="Signup">
