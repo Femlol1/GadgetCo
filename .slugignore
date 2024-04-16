@@ -1,3 +1,7 @@
 ecom-webapp-frontend/
 
 
+tests/
+*.psd
+*.pdf
+data/
