@@ -4,7 +4,6 @@ numpy==1.26.4
 pandas==2.2.1
 python-dotenv==1.0.1
 requests==2.31.0
-blosum==2.0.2
 fastjsonschema==2.19.1
 json5==0.9.14
 jsonpointer==2.4
