@@ -1,4 +1,17 @@
-import { doc, getDoc } from "firebase/firestore";
+import {
+	addDoc,
+	collection,
+	doc,
+	getDoc, // Added to fix 'limit is not defined'
+	getDocs, // Added to fix 'startAfter is not defined'
+	limit,
+	onSnapshot,
+	orderBy,
+	query,
+	serverTimestamp,
+	startAfter,
+	updateDoc,
+} from "firebase/firestore";
 import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -8,20 +21,24 @@ import { Col, Container, Row } from "reactstrap";
 import Helmet from "../components/Helmet/helmet";
 import CommonSection from "../components/UI/CommonSection";
 import ProductsList from "../components/UI/ProductsList";
+import useAuth from "../custom-hooks/useAuth";
 import useGetData from "../custom-hooks/useGetData";
 import { db } from "../firebase.config";
 import { cartActions } from "../redux/slices/cartSlice";
 import "../styles/product-details.css";
 
 const ProductDetails = () => {
+	const { currentUser, loading, error } = useAuth();
 	const [product, setProduct] = useState({});
 	const [tab, setTab] = useState("desc");
+	const [reviews, setReviews] = useState([]);
 	const [rating, setRating] = useState(null);
-	const reviewUser = useRef("");
 	const reviewMsg = useRef("");
 	const dispatch = useDispatch();
 	const { id } = useParams();
 	const { data: products } = useGetData("products");
+	const [lastVisible, setLastVisible] = useState(null);
+	const [allReviewsLoaded, setAllReviewsLoaded] = useState(false);
 
 	const docRef = doc(db, "products", id);
 
@@ -36,7 +53,64 @@ const ProductDetails = () => {
 			}
 		};
 		getProduct();
-	}, []);
+	}, [docRef]);
+
+	const addReview = async (productId, review) => {
+		if (!productId) {
+			console.error("Product ID is undefined.");
+			return;
+		}
+		try {
+			const reviewRef = collection(db, "products", productId, "reviews");
+			const docRef = doc(db, "products", productId);
+			await addDoc(reviewRef, {
+				...review,
+				createdAt: serverTimestamp(),
+			});
+
+			// Update the product document with new rating and recalculate average
+			const productDoc = await getDoc(docRef);
+			if (productDoc.exists()) {
+				const productData = productDoc.data();
+				const newRatings = [...(productData.ratings || []), review.rating];
+				const averageRating =
+					newRatings.reduce((a, b) => a + b, 0) / newRatings.length;
+				await updateDoc(docRef, {
+					ratings: newRatings,
+					avgRating: averageRating,
+				});
+			}
+
+			//toast.success("Review and rating added successfully!");
+		} catch (error) {
+			console.error("Failed to add review:", error);
+			toast.error("Failed to add review.");
+		}
+	};
+
+	const loadMoreReviews = async () => {
+		if (!lastVisible) return;
+
+		const next = query(
+			collection(db, "products", id, "reviews"),
+			orderBy("createdAt", "desc"),
+			startAfter(lastVisible),
+			limit(5) // Ensures we are importing and using limit correctly
+		);
+
+		getDocs(next).then((documentSnapshots) => {
+			const isEnd = documentSnapshots.size < 5;
+			setAllReviewsLoaded(isEnd);
+
+			const newReviews = documentSnapshots.docs.map((doc) => ({
+				id: doc.id,
+				...doc.data(),
+			}));
+
+			setReviews((prevReviews) => [...prevReviews, ...newReviews]);
+			setLastVisible(documentSnapshots.docs[documentSnapshots.docs.length - 1]);
+		});
+	};
 
 	const {
 		imgUrl,
@@ -52,19 +126,28 @@ const ProductDetails = () => {
 	const categoryLower = category?.toLowerCase() || "";
 
 	const relatedProducts = products.filter((item) => item.category === category);
-	const submitHandler = (e) => {
+
+	const handleReviewSubmit = async (e) => {
 		e.preventDefault();
-
-		const reviewUserName = reviewUser.current.value;
-		const reviewUsermsg = reviewMsg.current.value;
-
-		const reviewObj = {
-			userName: reviewUserName,
-			text: reviewUsermsg,
+		if (!id) {
+			toast.error("Product ID is missing.");
+			return;
+		}
+		if (!currentUser) {
+			toast.error("You must be logged in to submit a review.");
+			return;
+		}
+		const review = {
+			userName: currentUser.displayName || currentUser.email,
+			text: reviewMsg.current.value,
 			rating,
 		};
-		console.log(reviewObj);
-		toast.success("Review submitted");
+		await addReview(id, review);
+		if (reviewMsg.current) {
+			reviewMsg.current.value = "";
+		}
+		setRating(0);
+		toast.success("Review added successfully!");
 	};
 	const addToCart = () => {
 		dispatch(
@@ -78,8 +161,43 @@ const ProductDetails = () => {
 		toast.success("Item has been added to cart");
 	};
 	useEffect(() => {
+		const reviewsRef = collection(db, "products", id, "reviews");
+		const q = query(reviewsRef, orderBy("createdAt", "desc"), limit(5)); // Using limit here
+
+		const unsubscribe = onSnapshot(q, (querySnapshot) => {
+			const lastVisibleDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+			setLastVisible(lastVisibleDoc);
+			setAllReviewsLoaded(querySnapshot.empty);
+
+			const reviewsData = querySnapshot.docs.map((doc) => ({
+				id: doc.id,
+				...doc.data(),
+			}));
+			setReviews(reviewsData);
+		});
+
+		return () => unsubscribe();
+	}, [id]);
+
+	useEffect(() => {
 		window.scrollTo(0, 0);
-	}, [product]);
+	}, [id]); // Only re-run this effect if the `id` changes
+
+	if (loading) {
+		return (
+			<Container>
+				<p>Loading...</p>
+			</Container>
+		);
+	}
+
+	if (error) {
+		return (
+			<Container>
+				<p>Error: {error.message}</p>
+			</Container>
+		);
+	}
 
 	return (
 		<Helmet title={productName}>
@@ -157,60 +275,29 @@ const ProductDetails = () => {
 								</div>
 							) : (
 								<div className="Product__review">
-									<div className="review__wrapper d-flex align-items-center gap-5">
-										{" "}
-										{/* may need to remove text style*/}
-										{/* <ul>
-											{reviews?.map((item, index) => (
-												<li kew={index} className="mb-4">
-													<h6>Femi Isi</h6>
-													<span>{item.rating} ( rating)</span>
-													<p>{item.text}</p>
-												</li>
-											))}
-										</ul> */}
+									<div className="review__wrapper">
 										<div className="review__form">
 											<h4>Leave your experience</h4>
-											<form action="" onSubmit={submitHandler}>
-												<div className="form__group">
-													<input
-														type="text"
-														placeholder="Enter name"
-														ref={reviewUser}
-														required
-													/>
-												</div>
+											<p>
+												Average Rating:{" "}
+												{product.avgRating?.toFixed(2) || "Not rated yet"}
+											</p>
+											<form action="" onSubmit={handleReviewSubmit}>
 												<div className="form__group d-flex align-item-center gap-5 rating__group">
-													<motion.span
-														whileTap={{ scale: 1.2 }}
-														onClick={() => setRating(1)}
-													>
-														1<i class="ri-star-s-fill"></i>
-													</motion.span>
-													<motion.span
-														whileTap={{ scale: 1.2 }}
-														onClick={() => setRating(2)}
-													>
-														2<i class="ri-star-s-fill"></i>
-													</motion.span>
-													<motion.span
-														whileTap={{ scale: 1.2 }}
-														onClick={() => setRating(3)}
-													>
-														3<i class="ri-star-s-fill"></i>
-													</motion.span>
-													<motion.span
-														whileTap={{ scale: 1.2 }}
-														onClick={() => setRating(4)}
-													>
-														4<i class="ri-star-s-fill"></i>
-													</motion.span>
-													<motion.span
-														whileTap={{ scale: 1.2 }}
-														onClick={() => setRating(5)}
-													>
-														5<i class="ri-star-s-fill"></i>
-													</motion.span>
+													<label>Rating:</label>
+													{[1, 2, 3, 4, 5].map((star) => (
+														<motion.span
+															key={star}
+															whileTap={{ scale: 1.2 }}
+															onClick={() => setRating(star)}
+															style={{
+																color: star <= rating ? "gold" : "grey",
+																cursor: "pointer",
+															}}
+														>
+															<i className="ri-star-fill"></i>
+														</motion.span>
+													))}
 												</div>
 												<div className="form__group">
 													<textarea
@@ -229,6 +316,35 @@ const ProductDetails = () => {
 													Submit
 												</motion.button>
 											</form>
+										</div>{" "}
+										<div className="d ">
+											{reviews.map((review) => (
+												<li key={review.id} className="review-item">
+													<h4>user: {review.userName}</h4>
+
+													<div className="review__rating">
+														rating:{" "}
+														{Array.from({ length: 5 }, (_, index) => (
+															<i
+																key={index}
+																className={`ri-star-${
+																	index < review.rating ? "fill" : "line"
+																}`}
+															></i>
+														))}
+													</div>
+													<p>review: {review.text}</p>
+												</li>
+											))}
+											{!allReviewsLoaded && (
+												<motion.button
+													className="buy__btn"
+													onClick={loadMoreReviews}
+													whileTap={{ scale: 1.2 }}
+												>
+													Load More Reviews
+												</motion.button>
+											)}
 										</div>
 									</div>
 								</div>

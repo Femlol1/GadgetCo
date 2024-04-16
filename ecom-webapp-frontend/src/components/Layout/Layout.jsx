@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import AdminNav from "../../admin/AdminNav";
 import Routers from "../../routers/Routers";
-import Chatbot from "../Chatbot/chatbot";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 
@@ -28,10 +27,7 @@ const Layout = () => {
 			<div>
 				<Routers />
 			</div>
-			<ThemeProvider theme={theme}>
-				{" "}
-				<Chatbot />
-			</ThemeProvider>
+			<ThemeProvider theme={theme}> </ThemeProvider>
 			<Footer />
 		</>
 	);

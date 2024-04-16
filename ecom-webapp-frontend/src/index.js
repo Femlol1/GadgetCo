@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "remixicon/fonts/remixicon.css";
+import Chatbot from "./components/Chatbot/chatbot";
 
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
@@ -22,7 +23,9 @@ root.render(
 					closeOnClick
 					pauseOnHover={false}
 				/>
+
 				<App />
+				<Chatbot />
 			</Provider>
 		</BrowserRouter>
 	</React.StrictMode>

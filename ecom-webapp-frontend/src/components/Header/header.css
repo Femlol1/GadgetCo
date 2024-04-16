@@ -105,6 +105,9 @@
 .show__profileActions {
 	display: block !important;
 }
+.profile__logo {
+	padding-bottom: 15px;
+}
 
 .mobile__menu {
 	font-size: 1.3rem;
