@@ -29,12 +29,17 @@ function Chatbot() {
 		};
 	}, []); // The empty array ensures this effect runs only once on mount
 
+	const API_URL =
+		"https://server-4tvhbvwe7q-ew.a.run.app/get" || "http://localhost:8080";
+
 	const sendMessage = async (userMessage) => {
 		// setIsLoading(true);
 		const typingMessage = { text: "GadgetCo is typing...", sender: "bot" };
 		setMessages((currentMessages) => [...currentMessages, typingMessage]);
 		try {
-			const response = await fetch("http://localhost:5000/get", {
+			// for local testing
+			// "http://localhost:5000/get"
+			const response = await fetch(API_URL, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -63,44 +68,47 @@ function Chatbot() {
 			if (isMounted) {
 				setError("Error connecting to the chat service.");
 			}
-		} finally {
-			if (isMounted) {
-				// setIsLoading(false);
-			}
 		}
 	};
 	const modifyResponse = (response) => {
+		const startDate = new Date();
+		startDate.setDate(1); // Set the day to the 1st
+		const endDate = new Date();
+		endDate.setMonth(endDate.getMonth() + 1); // Set the month to the next month
+		endDate.setDate(0);
 		// Define replacements
 		const replacements = {
 			"{{Account Type}}": "Cheap",
 			"{{Order Number}}": "123456789",
+			"{{Order Tracking}}": "Order tracking",
 			"{{Invoice Number}}": "987654321",
 			"{{Online Order Interaction}}": "replacement value",
 			"{{Online Payment Interaction}}": "replacement value",
 			"{{Online Navigation Step}}": "replacement value",
 			"{{Online Customer Support Channel}}": "replacement value",
-			"{{Profile}}": "replacement value",
-			"{{Profile Type}}": "replacement value",
+			"{{Profile}}": "cheap",
+			"{{Profile Type}}": "Premium",
 			"{{Settings}}": "replacement value",
 			"{{Online Company Portal Info}}": "replacement value",
-			"{{Date}}": "replacement value",
-			"{{Date Range}}": "replacement value",
-			"{{Shipping Cut-off Time}}": "replacement value",
+			"{{Date}}": new Date().toLocaleDateString(),
+			"{{Date Range}}": `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`,
+			"{{Shipping Cut-off Time}}": "5pm",
 			"{{Delivery City}}": "Leicester",
-			"{{Salutation}}": "United Kingdom",
+			"{{Salutation}}": "Mr/Mrs",
 			"{{Delivery Country}}": "United Kingdom",
 			"{{Client First Name}}": "Femi",
 			"{{Client Last Name}}": "Osibemekun",
 			"{{Customer Support Phone Number}}": "07377788552",
 			"{{Customer Support Email}}": "00158@student.le.ac.uk",
+			"{{Customer Support Hours}}": "9am - 5pm",
 			"{{Live Chat Support}}": "United Kingdom",
-			"{{Website URL}}": "gadgetco.co.uk",
+			"{{Website URL}}": "gadgetco-3794d.web.app",
 			"{{Upgrade Account}}": "United Kingdom",
 			"{{Account Category}}": "new",
 			"{{Account Change}}": "Premium",
 			"{{Program}}": "United Kingdom",
-			"{{Refund Amount}}": "United Kingdom",
-			"{{Money Amount}}": "United Kingdom",
+			"{{Refund Amount}}": "£300",
+			"{{Money Amount}}": "£1000",
 			"{{Store Location}}": "United Kingdom",
 		};
 

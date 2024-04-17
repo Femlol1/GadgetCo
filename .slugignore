@@ -1,9 +1,6 @@
-
-
-
 tests/
-*.psd
-*.pdf
+_.psd
+_.pdf
 data/
 ecom-webapp-frontend/
 ecom-webapp-backend/Training.py
