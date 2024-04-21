@@ -49,7 +49,6 @@ const AdminNav = () => {
 
 	const toggleProfileActions = () => {
 		profileActionRef.current.classList.toggle("show__profileActions");
-		console.log("Clicked logo");
 	};
 	return (
 		<>

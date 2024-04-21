@@ -116,6 +116,25 @@
 .resize-button:hover {
 	background-color: #0056b3;
 }
+.close-button {
+	right: 5px;
+	border: none;
+	background: white;
+	color: var(--primary-color);
+	border-radius: 100%;
+	width: 20px;
+	height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-bottom: 1px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	margin-left: 10px;
+}
+.close-button:hover {
+	background-color: #ff0000;
+}
 .chatbot-header {
 	background-color: var(--primary-color);
 	color: white;
@@ -157,4 +176,46 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+/* .sentiment-feedback {
+	width: 50px;
+	height: 50px;
+	border: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	padding-left: 10px;
+	gap: 5px;
+} */
+/* .sentiment-feedback:hover {
+	background-color: var(--primary-color);
+} */
+.sentiment-feedback button {
+	background-color: #f0f0f0; /* Light grey background */
+	border: none;
+	border-radius: 15px; /* Rounded corners */
+	padding: 5px 10px; /* Top/bottom and left/right padding */
+	margin: 0 5px; /* Space between buttons */
+	cursor: pointer; /* Cursor to pointer to indicate it's clickable */
+	transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background color */
+	outline: none; /* Remove focus outline */
+}
+
+.sentiment-feedback button.positive:hover {
+	background-color: #d4edda; /* Light green background on hover */
+	color: #155724; /* Darker green text on hover */
+}
+
+.sentiment-feedback button.neutral:hover {
+	background-color: #fff3cd; /* Light amber background on hover */
+	color: #856404; /* Darker amber text on hover */
+}
+
+.sentiment-feedback button.negative:hover {
+	background-color: #f8d7da; /* Light red background on hover */
+	color: #721c24; /* Darker red text on hover */
+}
+/* You can add more specific styles like shadows or different fonts if you like */
+.sentiment-feedback button:focus {
+	box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1); /* Adding focus style */
 }

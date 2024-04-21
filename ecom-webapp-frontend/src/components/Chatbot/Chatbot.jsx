@@ -13,6 +13,7 @@ function Chatbot() {
 	const [error, setError] = useState("");
 	const [isMinimized, setIsMinimized] = useState(false); // New state to track if the chatbot is minimized
 	const isMounted = useRef(true);
+	const [sentimentGiven, setSentimentGiven] = useState({});
 
 	useEffect(() => {
 		isMounted.current = true;
@@ -21,6 +22,7 @@ function Chatbot() {
 			text:
 				"Hello! My name is GadgetCo.\n I am your customer service chatbot.\n  How can I assist you today?",
 			sender: "bot",
+			source: "AI",
 		};
 		setMessages([greetingMessage]); // Set the initial message
 
@@ -30,16 +32,69 @@ function Chatbot() {
 	}, []); // The empty array ensures this effect runs only once on mount
 
 	const API_URL =
-		"https://server-4tvhbvwe7q-ew.a.run.app/get" || "http://localhost:8080";
+		"https://server-4tvhbvwe7q-ew.a.run.app" || "http://localhost:8080";
+
+	const handleSentiment = (messageIndex, sentiment) => {
+		// Assuming messageIndex corresponds to the bot's message.
+		if (!sentimentGiven[messageIndex]) {
+			const userMessage = messages[messageIndex - 1]; // Get the user message.
+			const botMessage = messages[messageIndex]; // Get the bot message.
+
+			if (
+				userMessage &&
+				botMessage &&
+				userMessage.sender === "user" &&
+				botMessage.sender === "bot"
+			) {
+				setSentimentGiven((currentSentiments) => ({
+					...currentSentiments,
+					[messageIndex]: true,
+				}));
+
+				// Now send the feedback.
+				sendSentimentFeedback(
+					userMessage.text,
+					botMessage.text,
+					sentiment,
+					botMessage.source
+				);
+			}
+		}
+	};
+
+	const sendSentimentFeedback = async (
+		message,
+		response,
+		sentiment,
+		source
+	) => {
+		try {
+			const serverResponse = await fetch(API_URL + "/feedback", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ message, response, sentiment, source }),
+			});
+			const responseData = await serverResponse.json();
+			console.log("Feedback response:", responseData); // Log actual response from server.
+			if (!serverResponse.ok) {
+				throw new Error(`HTTP error! status: ${serverResponse.status}`);
+			}
+		} catch (error) {
+			console.error("Failed to send sentiment feedback:", error);
+			setError("Error sending sentiment feedback.");
+		}
+	};
 
 	const sendMessage = async (userMessage) => {
-		// setIsLoading(true);
-		const typingMessage = { text: "GadgetCo is typing...", sender: "bot" };
+		const typingMessage = {
+			text: "GadgetCo is typing...",
+			sender: "bot",
+			source: "Typing",
+		};
 		setMessages((currentMessages) => [...currentMessages, typingMessage]);
+
 		try {
-			// for local testing
-			// "http://localhost:5000/get"
-			const response = await fetch(API_URL, {
+			const response = await fetch(API_URL + "/get", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -50,27 +105,31 @@ function Chatbot() {
 				throw new Error(`HTTP error! status: ${response.status}`);
 			}
 			const responseData = await response.json();
-			setMessages((currentMessages) =>
-				currentMessages.filter((msg) => msg.text !== "GadgetCo is typing...")
-			);
-			if (isMounted.current) {
-				// Only update state if component is still mounted
-				const botMessage = {
-					text: modifyResponse(responseData.response),
-					sender: "bot",
-					sentiment: responseData.sentiment,
-				};
-				setMessages((currentMessages) => [...currentMessages, botMessage]);
-			}
-			// setIsLoading(false);
+			handleNewMessage(responseData.response, responseData.source);
 		} catch (error) {
 			console.error("Failed to fetch:", error);
-			if (isMounted) {
-				setError("Error connecting to the chat service.");
-			}
+			setError("Error connecting to the chat service.");
 		}
 	};
+	const handleNewMessage = (responseText, responseSource) => {
+		if (isMounted.current) {
+			setMessages((currentMessages) =>
+				currentMessages
+					.filter((msg) => msg.text !== "GadgetCo is typing...")
+					.concat({
+						text: modifyResponse(responseText),
+						sender: "bot",
+						source: responseSource,
+					})
+			);
+		}
+	};
+
 	const modifyResponse = (response) => {
+		if (typeof response !== "string") {
+			console.error("Expected responseText to be a string, got:", response);
+			return ""; // Return a default string or handle this case appropriately.
+		}
 		const startDate = new Date();
 		startDate.setDate(1); // Set the day to the 1st
 		const endDate = new Date();
@@ -81,6 +140,7 @@ function Chatbot() {
 			"{{Account Type}}": "Cheap",
 			"{{Order Number}}": "123456789",
 			"{{Order Tracking}}": "Order tracking",
+			"{{Tracking Number}}": "20920399",
 			"{{Invoice Number}}": "987654321",
 			"{{Online Order Interaction}}": "replacement value",
 			"{{Online Payment Interaction}}": "replacement value",
@@ -159,8 +219,8 @@ function Chatbot() {
 							<button className="resize-button" onClick={toggleSize}>
 								{isExpanded ? "-" : "+"}
 							</button>
-							<button className="resize-button" onClick={minimizeChatbot}>
-								X
+							<button className="close-button" onClick={minimizeChatbot}>
+								x
 							</button>
 						</div>
 					</div>
@@ -170,6 +230,28 @@ function Chatbot() {
 						{messages.map((message, index) => (
 							<div key={index} className={`message ${message.sender}`}>
 								{message.text}
+								{message.sender === "bot" && !sentimentGiven[index] && (
+									<div className="sentiment-feedback">
+										<button
+											className="positive"
+											onClick={() => handleSentiment(index, "positive")}
+										>
+											👍
+										</button>
+										<button
+											className="neutral"
+											onClick={() => handleSentiment(index, "neutral")}
+										>
+											😐
+										</button>
+										<button
+											className="negative"
+											onClick={() => handleSentiment(index, "negative")}
+										>
+											👎
+										</button>
+									</div>
+								)}
 							</div>
 						))}
 					</div>

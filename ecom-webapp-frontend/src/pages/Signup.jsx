@@ -106,6 +106,7 @@ const Signup = () => {
 											placeholder="Username"
 											value={username}
 											onChange={(e) => setUsername(e.target.value)}
+											required
 										/>
 									</FormGroup>
 									<FormGroup className="form__group">
@@ -114,6 +115,7 @@ const Signup = () => {
 											placeholder="Enter your email"
 											value={email}
 											onChange={(e) => setEmail(e.target.value)}
+											required
 										/>
 									</FormGroup>
 									<FormGroup className="form__group">
@@ -122,6 +124,7 @@ const Signup = () => {
 											placeholder="Enter your password"
 											value={password}
 											onChange={(e) => setPassword(e.target.value)}
+											required
 										/>
 									</FormGroup>
 									<FormGroup className="form__group">
@@ -133,6 +136,7 @@ const Signup = () => {
 											id="profilePicture"
 											accept="image/*"
 											onChange={(e) => handleFileValidation(e.target.files[0])}
+											required
 										/>
 									</FormGroup>
 									<button type="submit" className="buy__btn auth__btn">

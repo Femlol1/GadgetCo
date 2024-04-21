@@ -1,6 +1,7 @@
 import { signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import { motion } from "framer-motion";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -8,7 +9,7 @@ import { Container, Row } from "reactstrap";
 import logo from "../../assets/images/eco-logo.png";
 import userIcon from "../../assets/images/user-icon.png";
 import useAuth from "../../custom-hooks/useAuth";
-import { auth } from "../../firebase.config";
+import { auth, db } from "../../firebase.config";
 import "./header.css";
 
 const nav__links = [
@@ -35,6 +36,8 @@ const Header = () => {
 	const navigate = useNavigate();
 	const { currentUser } = useAuth();
 
+	const [isAdmin, setIsAdmin] = useState(false);
+
 	const stickyHeaderFunction = () => {
 		window.addEventListener("scroll", () => {
 			if (
@@ -58,6 +61,29 @@ const Header = () => {
 				toast.error(err.message);
 			});
 	};
+
+	useEffect(() => {
+		if (currentUser) {
+			const fetchAdminStatus = async () => {
+				try {
+					// Add the correct path to your user's admin status in Firestore
+					const docRef = doc(db, "users", currentUser.uid);
+					const docSnap = await getDoc(docRef);
+
+					if (docSnap.exists() && docSnap.data().isAdmin) {
+						setIsAdmin(true);
+					} else {
+						setIsAdmin(false);
+					}
+				} catch (error) {
+					console.error("Error fetching admin status:", error);
+				}
+			};
+
+			fetchAdminStatus();
+		}
+	}, [currentUser]);
+
 	useEffect(() => {
 		stickyHeaderFunction();
 		return () => window.removeEventListener("scroll", stickyHeaderFunction);
@@ -70,7 +96,6 @@ const Header = () => {
 
 	const toggleProfileActions = () => {
 		profileActionRef.current.classList.toggle("show__profileActions");
-		console.log("Clicked logo");
 	};
 
 	return (
@@ -130,7 +155,12 @@ const Header = () => {
 									{currentUser ? (
 										<div className=" d-flex align-items-center justify-content-center flex-column">
 											<span onClick={logout}>Logout</span>
-											<Link to="/dashboard">Dashboard</Link>
+											<span>
+												{currentUser && isAdmin && (
+													<Link to="/dashboard">Dashboard</Link>
+												)}
+											</span>
+											{/* Only show dashboard link if user is an admin */}
 										</div>
 									) : (
 										<div className=" d-flex align-items-center justify-content-center flex-column">
