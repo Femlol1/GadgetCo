@@ -126,10 +126,6 @@ const Header = () => {
 							</ul>
 						</div>
 						<div className="nav__icons">
-							<span className="fav__icon">
-								<i class="ri-heart-line"></i>
-								<span className="badge">1</span>
-							</span>
 							<span className="cart__icon" onClick={navToCart}>
 								<i class="ri-shopping-bag-line"></i>
 								<span className="badge">{totalQuantity}</span>

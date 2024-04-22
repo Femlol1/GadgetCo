@@ -1,9 +1,18 @@
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Button, Col, Container, Form, FormGroup, Row } from "reactstrap";
+import { Col, Container, Form, FormGroup, Row } from "reactstrap";
 import Helmet from "../components/Helmet/helmet";
 import CommonSection from "../components/UI/CommonSection";
 import "../styles/checkout.css";
+import CheckoutForm from "./CheckoutForm";
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(
+	"pk_test_51OkBMRKcxSAoBoZjuWl3c1GeCyl5tRmcln4xdcu0NMsqONbtUiHOTNdgtAI1OJnFmWrw7jcMBkGIkUYqfs55MXcC006C8el4Qh"
+);
 
 const Checkout = () => {
 	const totalQuantity = useSelector((state) => state.cart.totalQuantity);
@@ -31,7 +40,6 @@ const Checkout = () => {
 		console.log("Form Data:", formData);
 		// Process checkout here (e.g., send data to server, process payment)
 	};
-
 	return (
 		<Helmet title="Checkout">
 			<CommonSection title="Checkout" />
@@ -95,6 +103,7 @@ const Checkout = () => {
 										value={formData.postalCode}
 									/>
 								</FormGroup>
+
 								<FormGroup className="form__group">
 									<input
 										type="text"
@@ -104,9 +113,11 @@ const Checkout = () => {
 										value={formData.country}
 									/>
 								</FormGroup>
-								<Button className="buy__btn w-100" type="submit">
-									Place an order
-								</Button>
+								<FormGroup>
+									<Elements stripe={stripePromise}>
+										<CheckoutForm totalAmount={totalAmount} />
+									</Elements>
+								</FormGroup>
 							</Form>
 						</Col>
 						<Col lg="4">

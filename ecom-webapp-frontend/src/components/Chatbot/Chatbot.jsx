@@ -230,28 +230,31 @@ function Chatbot() {
 						{messages.map((message, index) => (
 							<div key={index} className={`message ${message.sender}`}>
 								{message.text}
-								{message.sender === "bot" && !sentimentGiven[index] && (
-									<div className="sentiment-feedback">
-										<button
-											className="positive"
-											onClick={() => handleSentiment(index, "positive")}
-										>
-											👍
-										</button>
-										<button
-											className="neutral"
-											onClick={() => handleSentiment(index, "neutral")}
-										>
-											😐
-										</button>
-										<button
-											className="negative"
-											onClick={() => handleSentiment(index, "negative")}
-										>
-											👎
-										</button>
-									</div>
-								)}
+								{/* Add a condition to check that feedback buttons should not be shown for the first message */}
+								{message.sender === "bot" &&
+									index !== 0 &&
+									!sentimentGiven[index] && (
+										<div className="sentiment-feedback">
+											<button
+												className="positive"
+												onClick={() => handleSentiment(index, "positive")}
+											>
+												👍
+											</button>
+											<button
+												className="neutral"
+												onClick={() => handleSentiment(index, "neutral")}
+											>
+												😐
+											</button>
+											<button
+												className="negative"
+												onClick={() => handleSentiment(index, "negative")}
+											>
+												👎
+											</button>
+										</div>
+									)}
 							</div>
 						))}
 					</div>
