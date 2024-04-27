@@ -93,6 +93,9 @@ const Header = () => {
 	const navToCart = () => {
 		navigate("/cart");
 	};
+	const navToSetting = () => {
+		navigate("/setting");
+	};
 
 	const toggleProfileActions = () => {
 		profileActionRef.current.classList.toggle("show__profileActions");
@@ -126,6 +129,9 @@ const Header = () => {
 							</ul>
 						</div>
 						<div className="nav__icons">
+							<span className="setting__icon" onClick={navToSetting}>
+								<i class="ri-settings-2-line"></i>
+							</span>
 							<span className="cart__icon" onClick={navToCart}>
 								<i class="ri-shopping-bag-line"></i>
 								<span className="badge">{totalQuantity}</span>

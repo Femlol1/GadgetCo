@@ -1,0 +1,13 @@
+nltk==3.8.1
+numpy==1.26.4
+openai==1.17.1
+requests==2.31.0
+python-dotenv==1.0.1
+Flask==3.0.3
+Flask-Cors==4.0.0
+tensorflow==2.16.1
+textblob==0.18.0.post0
+gunicorn==21.2.0
+google==3.0.0
+google-cloud==0.34.0
+google-cloud-storage==2.16.0

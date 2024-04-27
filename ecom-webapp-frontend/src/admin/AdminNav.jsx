@@ -50,6 +50,7 @@ const AdminNav = () => {
 	const toggleProfileActions = () => {
 		profileActionRef.current.classList.toggle("show__profileActions");
 	};
+
 	return (
 		<>
 			<header className="admin_header">
@@ -70,7 +71,10 @@ const AdminNav = () => {
 									<i class="ri-notification-3-line"></i>
 								</span>
 								<span>
-									<i class="ri-settings-2-line"></i>
+									<i
+										class="ri-settings-2-line"
+										onClick={() => navigate("/setting")}
+									></i>
 								</span>
 								<div className="profile">
 									<motion.img

@@ -12,6 +12,7 @@ import AddProducts from "../admin/AddProducts";
 import AllProducts from "../admin/AllProducts";
 import Dashboard from "../admin/Dashboard";
 import Users from "../admin/Users";
+import SettingsPage from "../pages/settings";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 
 const Routers = () => {
@@ -22,6 +23,7 @@ const Routers = () => {
 			<Route path="shop" element={<Shop />} />
 			<Route path="shop/:id" element={<ProductDetails />} />
 			<Route path="cart" element={<Cart />} />
+			<Route path="setting" element={<SettingsPage />} />
 
 			<Route path="/*" element={<ProtectedRoute />}>
 				<Route path="checkout" element={<Checkout />} />
