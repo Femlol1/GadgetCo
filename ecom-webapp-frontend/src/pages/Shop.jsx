@@ -112,7 +112,6 @@ const Shop = () => {
 								</select>
 							</div>
 						</Col>
-
 						<Col lg="6" md="12">
 							<div className="search__box">
 								<input

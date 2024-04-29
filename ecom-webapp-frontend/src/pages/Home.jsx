@@ -15,7 +15,6 @@ import useGetData from "../custom-hooks/useGetData";
 const Home = () => {
 	const { data: products, loading } = useGetData("products");
 	const [trendingProducts, setTrendingProducts] = useState([]);
-	const [bestSalesProducts, setBestSalesProducts] = useState([]);
 	const [mobileProducts, setMobileProducts] = useState([]);
 	const [wirelessProducts, setWirelessProducts] = useState([]);
 	const [popularProducts, setPopularProducts] = useState([]);
@@ -23,13 +22,14 @@ const Home = () => {
 	const year = new Date().getFullYear();
 
 	useEffect(() => {
-		const filteredTrendingProducts = products.filter(
-			(item) => item.category === "chair"
-		);
+		if (products.length) {
+			// Sorts all products by average rating descending and take the top 4
+			const sortedByRating = products
+				.sort((a, b) => b.avgRating - a.avgRating) // Sort products by average rating descending
+				.slice(0, 8); // Take the top 8 products
 
-		const filteredBestSalesProducts = products.filter(
-			(item) => item.category === "sofa"
-		);
+			setTrendingProducts(sortedByRating);
+		}
 
 		const filteredMobileProducts = products.filter(
 			(item) => item.category === "mobile"
@@ -42,8 +42,6 @@ const Home = () => {
 			(item) => item.category === "watch"
 		);
 
-		setTrendingProducts(filteredTrendingProducts);
-		setBestSalesProducts(filteredBestSalesProducts);
 		setMobileProducts(filteredMobileProducts);
 		setWirelessProducts(filteredWirelessProducts);
 		setPopularProducts(filteredPopularProducts);
@@ -90,20 +88,6 @@ const Home = () => {
 							<h5 className="fw-bold">Loading../||\..</h5>
 						) : (
 							<ProductsList data={trendingProducts} />
-						)}
-					</Row>
-				</Container>
-			</section>
-			<section className="best__sales">
-				<Container>
-					<Row>
-						<Col lg="12" className="text-center mb-5">
-							<h2 className="section__title">Best Sales</h2>
-						</Col>
-						{loading ? (
-							<h5 className="fw-bold">Loading../||\..</h5>
-						) : (
-							<ProductsList data={bestSalesProducts} />
 						)}
 					</Row>
 				</Container>
