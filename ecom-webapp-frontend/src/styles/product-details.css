@@ -15,6 +15,10 @@
 	color: gold;
 	font-weight: 500;
 }
+.star-rating i {
+	font-size: 1rem; /* Adjust size as needed */
+	margin-right: 0.1rem; /* Space out the stars */
+}
 
 .product__price {
 	font-size: 1.3rem;

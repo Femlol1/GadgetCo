@@ -13,9 +13,15 @@ const Shop = () => {
 	const [filteredProducts, setFilteredProducts] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [sortType, setSortType] = useState("default");
+	const [sortRating, setSortRating] = useState("default");
 
 	useEffect(() => {
 		let processedProducts = products;
+		processedProducts.forEach((product) => {
+			// If avgRating is not present or not a number, set a default value (e.g., 0)
+			product.avgRating =
+				product.avgRating && !isNaN(product.avgRating) ? product.avgRating : 0;
+		});
 
 		// Filter
 		if (activeFilter !== "all") {
@@ -31,7 +37,7 @@ const Shop = () => {
 			);
 		}
 
-		// Sort
+		// Sort by price
 		if (sortType === "ascending") {
 			processedProducts.sort(
 				(a, b) => parseFloat(a.price) - parseFloat(b.price)
@@ -41,9 +47,19 @@ const Shop = () => {
 				(a, b) => parseFloat(b.price) - parseFloat(a.price)
 			);
 		}
+		//sort by rating
+		if (sortRating === "High - Low") {
+			processedProducts.sort(
+				(a, b) => parseFloat(a.avgRating) - parseFloat(b.avgRating)
+			);
+		} else if (sortRating === "Low - High") {
+			processedProducts.sort(
+				(a, b) => parseFloat(b.avgRating) - parseFloat(a.avgRating)
+			);
+		}
 
 		setFilteredProducts(processedProducts);
-	}, [products, activeFilter, searchTerm, sortType]);
+	}, [products, activeFilter, searchTerm, sortType, sortRating]);
 
 	const handleFilter = (e) => {
 		setActiveFilter(e.target.value);
@@ -56,6 +72,9 @@ const Shop = () => {
 	const handleSort = (e) => {
 		setSortType(e.target.value);
 	};
+	const handleRating = (e) => {
+		setSortRating(e.target.value);
+	};
 
 	return (
 		<Helmet title="Shop">
@@ -63,7 +82,7 @@ const Shop = () => {
 			<section>
 				<Container>
 					<Row>
-						<Col lg="3" md="6">
+						<Col lg="2" md="6" className="text-end">
 							<div className="filter__widget">
 								<select onChange={handleFilter}>
 									<option value="all">Filter By Category</option>
@@ -75,7 +94,7 @@ const Shop = () => {
 								</select>
 							</div>
 						</Col>
-						<Col lg="3" md="6" className="text-end">
+						<Col lg="2" md="6" className="text-end">
 							<div className="filter__widget">
 								<select onChange={handleSort}>
 									<option value="default">Sort By Price</option>
@@ -84,6 +103,16 @@ const Shop = () => {
 								</select>
 							</div>
 						</Col>
+						<Col lg="2" md="6" className="text-end">
+							<div className="filter__widget">
+								<select onChange={handleRating}>
+									<option value="default">Sort By Trending</option>
+									<option value="High - Low">Lowest Trending</option>
+									<option value="Low - High">Highest Trending</option>
+								</select>
+							</div>
+						</Col>
+
 						<Col lg="6" md="12">
 							<div className="search__box">
 								<input

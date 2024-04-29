@@ -88,6 +88,26 @@ const ProductDetails = () => {
 			toast.error("Failed to add review.");
 		}
 	};
+	const StarRating = ({ rating }) => {
+		const totalStars = 5;
+
+		// Create an array of stars to be displayed
+		const starElements = [];
+		for (let i = 1; i <= totalStars; i++) {
+			starElements.push(
+				<i
+					key={i}
+					className={i <= rating ? "ri-star-fill" : "ri-star-line"}
+					style={{
+						color: i <= rating ? "#ffc107" : "#e4e5e9",
+						cursor: "default",
+					}}
+				></i>
+			);
+		}
+
+		return <div className="star-rating">{starElements}</div>;
+	};
 
 	const loadMoreReviews = async () => {
 		if (!lastVisible) return;
@@ -214,21 +234,10 @@ const ProductDetails = () => {
 								<h2>{productName}</h2>
 								<div className="product__rating d-flex align-items-center gap-5 mb-3">
 									<div>
-										<span>
-											<i class="ri-star-s-fill"></i>
-										</span>
-										<span>
-											<i class="ri-star-s-fill"></i>
-										</span>
-										<span>
-											<i class="ri-star-s-fill"></i>
-										</span>
-										<span>
-											<i class="ri-star-s-fill"></i>
-										</span>
-										<span>
-											<i class="ri-star-half-s-fill"></i>
-										</span>
+										<StarRating rating={product.avgRating || 0} />
+										<h6>
+											Rating: {product.avgRating?.toFixed(2) || "Not rated yet"}
+										</h6>
 									</div>
 									<p>{/* (<span>{avgRating}</span> ratings) */}</p>
 								</div>

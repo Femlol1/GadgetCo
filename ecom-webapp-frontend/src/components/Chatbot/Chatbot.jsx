@@ -75,7 +75,7 @@ function Chatbot() {
 				body: JSON.stringify({ message, response, sentiment, source }),
 			});
 			const responseData = await serverResponse.json();
-			console.log("Feedback response:", responseData); // Log actual response from server.
+			console.log("Feedback response:", responseData); // Log actual response from server adn use for testing and visualization
 			if (!serverResponse.ok) {
 				throw new Error(`HTTP error! status: ${serverResponse.status}`);
 			}
@@ -217,10 +217,14 @@ function Chatbot() {
 						GadgetCo Chatbot
 						<div className="header-buttons">
 							<button className="resize-button" onClick={toggleSize}>
-								{isExpanded ? "-" : "+"}
+								{isExpanded ? (
+									<i class="ri-arrow-down-s-line"></i>
+								) : (
+									<i class="ri-arrow-up-s-line"></i>
+								)}
 							</button>
 							<button className="close-button" onClick={minimizeChatbot}>
-								x
+								<i class="ri-close-line"></i>
 							</button>
 						</div>
 					</div>

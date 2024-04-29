@@ -23,6 +23,27 @@ const ProductCard = ({ item }) => {
 
 		toast.success("Item has been added to cart");
 	};
+	const StarRating = ({ rating }) => {
+		const totalStars = 5;
+
+		// Creates an array of stars to be displayed
+		const starElements = [];
+		for (let i = 1; i <= totalStars; i++) {
+			starElements.push(
+				<i
+					key={i}
+					className={i <= rating ? "ri-star-fill" : "ri-star-line"}
+					style={{
+						color: i <= rating ? "#ffc107" : "#e4e5e9",
+						cursor: "default",
+					}}
+				></i>
+			);
+		}
+
+		return <div className="star-rating">{starElements}</div>;
+	};
+
 	return (
 		<Col lg="3" md="4" className="mb-2">
 			<div className="product__item">
@@ -35,6 +56,9 @@ const ProductCard = ({ item }) => {
 					<h3 className="product__name">
 						<Link to={`/shop/${item.id}`}>{item.productName}</Link>
 					</h3>
+					<div className="product__rating">
+						<StarRating rating={item.avgRating || 0} />
+					</div>
 					<span>{item.category}</span>
 				</div>
 
