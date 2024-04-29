@@ -34,9 +34,7 @@ const Signup = () => {
 
 			uploadTask.on(
 				"state_changed",
-				(snapshot) => {
-					// Optional: Handle upload progress
-				},
+				(snapshot) => {},
 				(error) => {
 					toast.error(error.message);
 					setLoading(false);
@@ -56,8 +54,6 @@ const Signup = () => {
 							email,
 							photoURL: downloadURL,
 						});
-						//toast.error("Document written with ID: ", username);
-						//console.log("Document written with ID: ", docRef.id);
 					});
 				}
 			);

@@ -55,7 +55,7 @@ def get_bot_response():
     
     # Log conversation for further improvement and debugging
     chat_log.append({'role': 'user', 'content': message})
-    chat_log.append({'role': 'GadgetCo customer service assistant', 'content': response})
+    chat_log.append({'role': 'system', 'content': response})
     
     return jsonify({"response": response, "source": source})
 

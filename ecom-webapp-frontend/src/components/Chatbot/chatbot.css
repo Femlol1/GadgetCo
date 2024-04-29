@@ -24,8 +24,10 @@
 
 /* Styling for the chatbot in expanded mode */
 .chatbot.expanded {
-	width: 1200px;
+	width: auto;
 	height: 600px;
+	max-width: auto;
+	max-height: 80vh;
 }
 
 /* Chat messages area */
@@ -46,7 +48,6 @@
 	font-family: Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.4;
-	max-width: 100%;
 }
 
 /* User message styling */
@@ -127,7 +128,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding-bottom: 1px;
 	cursor: pointer;
 	transition: background-color 0.3s;
 	margin-left: 10px;
@@ -177,19 +177,7 @@
 	justify-content: center;
 	align-items: center;
 }
-/* .sentiment-feedback {
-	width: 50px;
-	height: 50px;
-	border: none;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	padding-left: 10px;
-	gap: 5px;
-} */
-/* .sentiment-feedback:hover {
-	background-color: var(--primary-color);
-} */
+
 .sentiment-feedback button {
 	background-color: #f0f0f0; /* Light grey background */
 	border: none;

@@ -1,81 +1,96 @@
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { updateProfile } from "firebase/auth";
+import { doc, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Helmet from "../components/Helmet/helmet";
 import CommonSection from "../components/UI/CommonSection";
-import { db, storage } from "../firebase.config"; // Import your Firestore configuration
+import useAuth from "../custom-hooks/useAuth";
+import { db, storage } from "../firebase.config";
+import "../styles/settings.css";
 
 function SettingsPage() {
 	const [username, setUsername] = useState("");
-	// const [profilePicture, setProfilePicture] = useState("");
-	const [profilePictureUrl, setProfilePictureUrl] = useState("");
-	const [userDocId, setUserDocId] = useState("");
-
-	const userId = "current_user_id";
+	const [profilePicture, setProfilePicture] = useState(null); // Store the file, not URL
+	const { currentUser } = useAuth(); // Assumed to be the Firebase auth user
+	const [isLoading, setLoading] = useState(false);
 
 	useEffect(() => {
-		// Fetch user data from Firestore
-		const fetchUserData = async () => {
-			const docRef = doc(db, "users", userId);
-			const docSnap = await getDoc(docRef);
+		if (currentUser) {
+			setUsername(currentUser.displayName || "");
+			// For profile picture, you can use currentUser.photoURL to show current picture
+		}
+	}, [currentUser]);
 
-			if (docSnap.exists()) {
-				const data = docSnap.data();
-				setUsername(data.username);
-				setProfilePictureUrl(data.profilePicture);
-				setUserDocId(docSnap.id);
-			} else {
-				console.log("No such user!");
-			}
-		};
-
-		fetchUserData();
-	}, [userId]);
-
-	const handleProfilePictureChange = async (event) => {
-		const file = event.target.files[0];
-		if (!file) return;
-
-		const storageRef = ref(storage, `profilePictures/${userId}/${file.name}`);
-		await uploadBytes(storageRef, file);
-
-		const downloadUrl = await getDownloadURL(storageRef);
-		setProfilePictureUrl(downloadUrl);
+	const handleProfilePictureChange = (e) => {
+		if (e.target.files[0]) {
+			setProfilePicture(e.target.files[0]);
+		}
+		// setProfilePicture(e.target.files[0]); // Store the file object
 	};
 
-	const handleSubmit = async (event) => {
+	const handleUpdateProfile = async (event) => {
 		event.preventDefault();
+		if (!username) {
+			toast.error("Username cannot be empty.");
+			return;
+		}
+		setLoading(true);
+		try {
+			let downloadURL = currentUser.photoURL; // Default to existing URL
 
-		const userRef = doc(db, "users", userDocId);
-		await updateDoc(userRef, {
-			username: username,
-			profilePicture: profilePictureUrl,
-		});
+			if (profilePicture) {
+				const storageRef = ref(storage, `images/${Date.now() + username}`);
+				const snapshot = await uploadBytesResumable(storageRef, profilePicture);
+				downloadURL = await getDownloadURL(snapshot.ref);
+			}
+
+			await updateProfile(currentUser, {
+				displayName: username,
+				photoURL: downloadURL,
+			});
+
+			const userRef = doc(db, "users", currentUser.uid);
+			await updateDoc(userRef, {
+				displayName: username,
+				photoURL: downloadURL,
+			});
+
+			toast.success("Profile updated successfully!");
+		} catch (error) {
+			toast.error("Failed to update profile: " + error.message);
+		} finally {
+			setLoading(false);
+		}
 	};
+	if (!currentUser) {
+		return <div>Loading...</div>;
+	}
 
 	return (
 		<Helmet title="Settings">
 			<CommonSection title="Settings" />
-			<div>
-				<h1>Settings</h1>
-				<form onSubmit={handleSubmit}>
+			<div className="settings-form">
+				<form onSubmit={handleUpdateProfile}>
 					<label>
-						Username:
-						<input
-							type="text"
-							value={username}
-							onChange={(e) => setUsername(e.target.value)}
-						/>
+						<h4>Current username: {username}</h4>
 					</label>
-
-					<br />
+					<label>
+						Input new username:
+						<input type="text" onChange={(e) => setUsername(e.target.value)} />
+					</label>
 					<label>
 						Profile Picture:
 						<input type="file" onChange={handleProfilePictureChange} />
+						{currentUser.photoURL && (
+							<div className="profile-picture-preview">
+								<img src={currentUser.photoURL} alt="Profile" />
+							</div>
+						)}
 					</label>
-					{profilePictureUrl && <img src={profilePictureUrl} alt="Profile" />}
-					<br />
-					<button type="submit">Save</button>
+					<button type="submit" disabled={isLoading}>
+						{isLoading ? "Updating..." : "Update Profile"}
+					</button>
 				</form>
 			</div>
 		</Helmet>
