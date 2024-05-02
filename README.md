@@ -1,9 +1,32 @@
-# Ecommerce Custommer service Chatbot
+# React E-Commerce Web Application with AI Chatbot
 
-## Information about this repository
+This project is a React-based e-commerce application integrated with an AI-powered chatbot for enhancing customer service. The chatbot is designed to handle inquiries automatically using natural language processing to provide a seamless shopping experience for users.
 
-This is the repository that you are going to use **individually** for developing your project. Please use the resources provided in the module to learn about **plagiarism** and how plagiarism awareness can foster your learning.
+## Features
 
-Regarding the use of this repository, once a feature (or part of it) is developed and **working** or parts of your system are integrated and **working**, define a commit and push it to the remote repository. You may find yourself making a commit after a productive hour of work (or even after 20 minutes!), for example. Choose commit message wisely and be concise.
+- Product Browsing: Users can filter, view and search for products.
+- Product reviews and ratings
+- AI Chatbot: A chatbot to assist with customer inquiries.
+- Shopping Cart: Users can add products to their cart and manage them.
+- Admin product management
+- Admin user management
 
-Please choose the structure of the contents of this repository that suits the needs of your project but do indicate in this file where the main software artefacts are located.
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- Node.js and npm installed.
+
+## Installing
+
+To install the React e-commerce application, follow these steps:
+
+1. Clone the repository:
+
+   git clone https://campus.cs.le.ac.uk/gitlab/ug_project/23-24/oo158.git
+
+   cd oo158/ecom-webapp-frontend
+
+2. Running the application
+
+   npm start

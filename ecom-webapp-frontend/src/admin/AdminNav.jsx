@@ -9,6 +9,7 @@ import useAuth from "../custom-hooks/useAuth";
 import { auth } from "../firebase.config";
 import "../styles/admin-nav.css";
 
+// I define an array of objects, each representing a navigation item in the admin dashboard
 const admin__nav = [
 	{
 		display: "Dashboard",
@@ -32,6 +33,7 @@ const admin__nav = [
 	},
 ];
 
+// I define the AdminNav component
 const AdminNav = () => {
 	const { currentUser } = useAuth();
 	const navigate = useNavigate();
@@ -39,14 +41,16 @@ const AdminNav = () => {
 	const logout = () => {
 		signOut(auth)
 			.then(() => {
+				// On successful logout, I show a success toast and navigate to the home page
 				toast.success("Logged out");
 				navigate("/home");
 			})
 			.catch((err) => {
+				// On error, I show an error toast with the error message
 				toast.error(err.message);
 			});
 	};
-
+	// I define a function to toggle the visibility of the profile actions
 	const toggleProfileActions = () => {
 		profileActionRef.current.classList.toggle("show__profileActions");
 	};
@@ -105,7 +109,6 @@ const AdminNav = () => {
 										)}
 									</div>
 								</div>
-								{/* <img src={currentUser && currentUser.photoURL} alt="" /> */}
 							</div>
 						</div>
 					</Container>

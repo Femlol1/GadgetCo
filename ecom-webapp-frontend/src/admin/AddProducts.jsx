@@ -31,7 +31,6 @@ const AddProducts = () => {
 				"state_changed",
 				(snapshot) => {
 					// Observe state change events such as progress, pause, and resume
-					// This is where you could include a progress indicator
 				},
 				(error) => {
 					// Handle unsuccessful uploads

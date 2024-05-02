@@ -5,8 +5,9 @@ import "../Chatbot/chatbot.css";
 	rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
 />;
-
+// the Chatbot component
 function Chatbot() {
+	// I define the state variables
 	const [messages, setMessages] = useState([]);
 	const [input, setInput] = useState("");
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -35,17 +36,19 @@ function Chatbot() {
 		"https://server-4tvhbvwe7q-ew.a.run.app" || "http://localhost:8080";
 
 	const handleSentiment = (messageIndex, sentiment) => {
-		// Assuming messageIndex corresponds to the bot's message.
+		// I check if sentiment feedback has already been given for this message
 		if (!sentimentGiven[messageIndex]) {
 			const userMessage = messages[messageIndex - 1]; // Get the user message.
 			const botMessage = messages[messageIndex]; // Get the bot message.
 
+			// I check if the user and bot messages exist and are from the correct senders
 			if (
 				userMessage &&
 				botMessage &&
 				userMessage.sender === "user" &&
 				botMessage.sender === "bot"
 			) {
+				// I update the sentimentGiven state to indicate that feedback has been given for this message
 				setSentimentGiven((currentSentiments) => ({
 					...currentSentiments,
 					[messageIndex]: true,
@@ -69,13 +72,14 @@ function Chatbot() {
 		source
 	) => {
 		try {
+			// I send a POST request to the server with the feedback data
 			const serverResponse = await fetch(API_URL + "/feedback", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ message, response, sentiment, source }),
 			});
 			const responseData = await serverResponse.json();
-			console.log("Feedback response:", responseData); // Log actual response from server adn use for testing and visualization
+			console.log("Feedback response:", responseData); // Log actual response from server and use for testing and visualization
 			if (!serverResponse.ok) {
 				throw new Error(`HTTP error! status: ${serverResponse.status}`);
 			}
@@ -94,6 +98,7 @@ function Chatbot() {
 		setMessages((currentMessages) => [...currentMessages, typingMessage]);
 
 		try {
+			// I send a POST request to the server with the user message
 			const response = await fetch(API_URL + "/get", {
 				method: "POST",
 				headers: {
@@ -105,6 +110,7 @@ function Chatbot() {
 				throw new Error(`HTTP error! status: ${response.status}`);
 			}
 			const responseData = await response.json();
+			// I handle the new message from the server
 			handleNewMessage(responseData.response, responseData.source);
 		} catch (error) {
 			console.error("Failed to fetch:", error);
@@ -113,6 +119,7 @@ function Chatbot() {
 	};
 	const handleNewMessage = (responseText, responseSource) => {
 		if (isMounted.current) {
+			// I update the messages state with the new message
 			setMessages((currentMessages) =>
 				currentMessages
 					.filter((msg) => msg.text !== "GadgetCo is typing...")
@@ -125,6 +132,7 @@ function Chatbot() {
 		}
 	};
 
+	// I define a function to modify the response from the server
 	const modifyResponse = (response) => {
 		if (typeof response !== "string") {
 			console.error("Expected responseText to be a string, got:", response);
@@ -184,10 +192,11 @@ function Chatbot() {
 		return modifiedResponse;
 	};
 
+	// I define a function to handle input change
 	const handleInputChange = (e) => {
 		setInput(e.target.value);
 	};
-
+	// I define a function to handle form submission from the chatbot
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setError("");

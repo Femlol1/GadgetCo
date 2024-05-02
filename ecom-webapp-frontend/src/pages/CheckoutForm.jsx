@@ -9,7 +9,6 @@ const CheckoutForm = ({ totalAmount }) => {
 	const handlePayment = async (event) => {
 		event.preventDefault();
 		if (!stripe || !elements) {
-			// Stripe.js has not yet loaded.
 			return;
 		}
 
@@ -24,7 +23,6 @@ const CheckoutForm = ({ totalAmount }) => {
 			console.log("[error]", error);
 		} else {
 			console.log("[PaymentMethod]", paymentMethod);
-			// TODO: Pass paymentMethod.id to your backend here to process the payment
 		}
 	};
 

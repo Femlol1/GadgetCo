@@ -5,9 +5,11 @@ import { Col, Container, Row } from "reactstrap";
 import useGetData from "../custom-hooks/useGetData";
 import { db } from "../firebase.config";
 
+// I define the AllProducts component
 const AllProducts = () => {
 	const { data: productsData, loading } = useGetData("products");
 
+	// I define a function to delete a product
 	const deleteProduct = async (id) => {
 		await deleteDoc(doc(db, "products", id));
 		toast.success("Product has been deleted");

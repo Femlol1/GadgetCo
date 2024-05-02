@@ -8,10 +8,14 @@ import { addItem } from "../../redux/slices/cartSlice"; // Adjusted import
 
 import "../../styles/product-card.css";
 
+// ProductCard component
 const ProductCard = ({ item }) => {
+	// Using useDispatch to dispatch actions
 	const dispatch = useDispatch();
 
+	// Function to add the item to the cart
 	const addToCart = () => {
+		// Dispatching the addItem action with the item data
 		dispatch(
 			addItem({
 				id: item.id,
@@ -23,6 +27,8 @@ const ProductCard = ({ item }) => {
 
 		toast.success("Item has been added to cart");
 	};
+
+	// StarRating component to display the rating of the product
 	const StarRating = ({ rating }) => {
 		const totalStars = 5;
 

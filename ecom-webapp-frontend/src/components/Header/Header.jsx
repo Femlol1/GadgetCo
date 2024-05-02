@@ -12,6 +12,7 @@ import useAuth from "../../custom-hooks/useAuth";
 import { auth, db } from "../../firebase.config";
 import "./header.css";
 
+// Navigation links for the header
 const nav__links = [
 	{
 		path: "home",
@@ -26,18 +27,23 @@ const nav__links = [
 		display: "Cart",
 	},
 ];
-
+// Header component
 const Header = () => {
+	// Using useRef to get reference to the header and menu elements
 	const headerRef = useRef(null);
+	// Using useSelector to get the total quantity of items in the cart from the redux store
 	const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
 	const menuRef = useRef(null);
 	const profileActionRef = useRef(null);
+	// Using useNavigate for programmatic navigation
 	const navigate = useNavigate();
+	// Using custom hook to get the current user
 	const { currentUser } = useAuth();
 
 	const [isAdmin, setIsAdmin] = useState(false);
 
+	// Function to make the header sticky on scroll
 	const stickyHeaderFunction = () => {
 		window.addEventListener("scroll", () => {
 			if (
@@ -51,6 +57,7 @@ const Header = () => {
 		});
 	};
 
+	// Function to handle logout
 	const logout = () => {
 		signOut(auth)
 			.then(() => {
@@ -62,6 +69,7 @@ const Header = () => {
 			});
 	};
 
+	// useEffect to fetch admin status of the user
 	useEffect(() => {
 		if (currentUser) {
 			const fetchAdminStatus = async () => {
@@ -84,12 +92,15 @@ const Header = () => {
 		}
 	}, [currentUser]);
 
+	// useEffect to add and remove the scroll event listener
 	useEffect(() => {
 		stickyHeaderFunction();
 		return () => window.removeEventListener("scroll", stickyHeaderFunction);
 	});
+	// Function to toggle the menu
 	const menuToggle = () => menuRef.current.classList.toggle("active__menu");
 
+	// Functions to navigate to cart and settings
 	const navToCart = () => {
 		navigate("/cart");
 	};

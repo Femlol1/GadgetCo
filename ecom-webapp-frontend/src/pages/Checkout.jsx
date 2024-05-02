@@ -8,8 +8,6 @@ import CommonSection from "../components/UI/CommonSection";
 import "../styles/checkout.css";
 import CheckoutForm from "./CheckoutForm";
 
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
 const stripePromise = loadStripe(
 	"pk_test_51OkBMRKcxSAoBoZjuWl3c1GeCyl5tRmcln4xdcu0NMsqONbtUiHOTNdgtAI1OJnFmWrw7jcMBkGIkUYqfs55MXcC006C8el4Qh"
 );
@@ -38,7 +36,6 @@ const Checkout = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log("Form Data:", formData);
-		// Process checkout here (e.g., send data to server, process payment)
 	};
 	return (
 		<Helmet title="Checkout">

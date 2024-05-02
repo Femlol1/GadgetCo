@@ -179,31 +179,31 @@
 }
 
 .sentiment-feedback button {
-	background-color: #f0f0f0; /* Light grey background */
+	background-color: #f0f0f0;
 	border: none;
-	border-radius: 15px; /* Rounded corners */
-	padding: 5px 10px; /* Top/bottom and left/right padding */
-	margin: 0 5px; /* Space between buttons */
-	cursor: pointer; /* Cursor to pointer to indicate it's clickable */
-	transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background color */
-	outline: none; /* Remove focus outline */
+	border-radius: 15px;
+	padding: 5px 10px;
+	margin: 0 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease, color 0.3s ease;
+	outline: none;
 }
 
 .sentiment-feedback button.positive:hover {
-	background-color: #d4edda; /* Light green background on hover */
-	color: #155724; /* Darker green text on hover */
+	background-color: #d4edda;
+	color: #155724;
 }
 
 .sentiment-feedback button.neutral:hover {
-	background-color: #fff3cd; /* Light amber background on hover */
-	color: #856404; /* Darker amber text on hover */
+	background-color: #fff3cd;
+	color: #856404;
 }
 
 .sentiment-feedback button.negative:hover {
 	background-color: #f8d7da; /* Light red background on hover */
 	color: #721c24; /* Darker red text on hover */
 }
-/* You can add more specific styles like shadows or different fonts if you like */
+
 .sentiment-feedback button:focus {
 	box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1); /* Adding focus style */
 }

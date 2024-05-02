@@ -15,6 +15,7 @@ import Users from "../admin/Users";
 import SettingsPage from "../pages/Settings";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 
+//  I define the Routers component
 const Routers = () => {
 	return (
 		<Routes>
@@ -35,6 +36,7 @@ const Routers = () => {
 				{/**May need to may back to this and change to products */}
 				<Route path="dashboard/users" element={<Users />} />
 			</Route>
+			{/* I define the "login" and "signup" routes and associate them with their respective components */}
 			<Route path="login" element={<Login />} />
 			<Route path="signup" element={<Signup />} />
 		</Routes>
