@@ -25,8 +25,11 @@ To install the React e-commerce application, follow these steps:
 
    git clone https://campus.cs.le.ac.uk/gitlab/ug_project/23-24/oo158.git
 
-   cd oo158/ecom-webapp-frontend
+2. Running the Frontend web Application
 
-2. Running the application
+   `cd oo158/ecom-webapp-frontend`
+   `npm start`
 
-   npm start
+3. Running the Backend web Application
+   `cd oo158/ecom-webapp-backend`
+   `python app.py`

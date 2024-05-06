@@ -32,8 +32,9 @@ function Chatbot() {
 		};
 	}, []); // The empty array ensures this effect runs only once on mount
 
-	const API_URL =
-		"https://server-4tvhbvwe7q-ew.a.run.app" || "http://localhost:8080";
+	const API_URL = "http://localhost:8080";
+	// const API_URL =
+	// "https://server-4tvhbvwe7q-ew.a.run.app" || "http://localhost:8080";
 
 	const handleSentiment = (messageIndex, sentiment) => {
 		// I check if sentiment feedback has already been given for this message
@@ -78,8 +79,8 @@ function Chatbot() {
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ message, response, sentiment, source }),
 			});
-			const responseData = await serverResponse.json();
-			console.log("Feedback response:", responseData); // Log actual response from server and use for testing and visualization
+			// const responseData = await serverResponse.json();
+			// console.log("Feedback response:", responseData); // Log actual response from server and use for testing and visualization
 			if (!serverResponse.ok) {
 				throw new Error(`HTTP error! status: ${serverResponse.status}`);
 			}
