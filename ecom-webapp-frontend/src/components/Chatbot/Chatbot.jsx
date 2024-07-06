@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import chatbot_icon from "../../assets/images/chat-bot.svg";
+import useAuth from "../../custom-hooks/useAuth";
 import "../Chatbot/chatbot.css";
 <link
 	rel="stylesheet"
@@ -15,6 +16,7 @@ function Chatbot() {
 	const [isMinimized, setIsMinimized] = useState(false); // New state to track if the chatbot is minimized
 	const isMounted = useRef(true);
 	const [sentimentGiven, setSentimentGiven] = useState({});
+	const { currentUser } = useAuth(); // Assumed to be the Firebase auth user
 
 	useEffect(() => {
 		isMounted.current = true;
@@ -179,6 +181,7 @@ function Chatbot() {
 			"{{Refund Amount}}": "£300",
 			"{{Money Amount}}": "£1000",
 			"{{Store Location}}": "United Kingdom",
+			"{{Person Name}}": currentUser.displayName || "Femi",
 		};
 
 		// Replace all placeholders with their corresponding replacements

@@ -42,7 +42,7 @@ intents = json.loads(open(intents_path).read())
 words = pickle.load(open(words_path, 'rb'))
 classes = pickle.load(open(classes_path, 'rb'))
 model = load_model(model_path)
-ERROR_THRESHOLD = 0.25
+ERROR_THRESHOLD = 0.75
 
 chat_log = []
 
@@ -97,11 +97,11 @@ def get_response(intents_list, intents_json, message):
     # 
     if message.strip().lower() in ["hello", "hi", "hey", "wassup", "Hi there","Good morning","Howdy", "Good afternoon"]:
         response = "Hello! How can I assist you today?"
-        source = 'Hardcoded'  # Indicates the response came from my model
-        print("Hardcoded")
+        source = 'Hardcoded'  # Indicates the response was hardcoded
+        print("Response source:", source)  # Debug statement
         return response, source
     if not intents_list or intents_list[0]['probability'] < ERROR_THRESHOLD:
-        print("Fallback to GPT-3, insufficient confidence.")  # Debug statement
+        print("Fallback to GPT-3, insufficient confidence.")  #indicates responce came from gpt
         response, source = get_gpt3_response(message)
     else:
         tag = intents_list[0]['intent']
@@ -109,12 +109,12 @@ def get_response(intents_list, intents_json, message):
         if sentiment < -0.5:
             print("Model understands the bad Sentiment.")  # Debug statement
             response = "I'm sorry to hear that. "
-            source = 'AI Model'  # Indicates the response came from my model
+            source = 'High Sentiment from AI Model'  # Indicates the response came from my model but had a bad sentiment 
         else:
             response = random.choice(responses)
             source = 'AI Model'  # Indicates the response came from my model
         print("Model understands query.")  # Debug statement
-        print("Response source:", source)  # Debug statement
+    print("Response source:", source)  # Debug statement
     return response, source
 
 def get_gpt3_response(message, chat_log=None):
@@ -125,7 +125,7 @@ def get_gpt3_response(message, chat_log=None):
     }
     data = {
         'model': 'gpt-3.5-turbo',
-        'messages': [{'role': 'system', 'content': 'You are a helpful assistant.'},
+        'messages': [{'role': 'system', 'content': 'You are a customer service chatbot for the website Gadgetco, which sells mobile phones and furniture.'},
                      {'role': 'user', 'content': message}]
     }
     if chat_log:
