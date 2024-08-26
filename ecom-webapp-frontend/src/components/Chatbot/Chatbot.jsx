@@ -181,7 +181,7 @@ function Chatbot() {
 			"{{Refund Amount}}": "£300",
 			"{{Money Amount}}": "£1000",
 			"{{Store Location}}": "United Kingdom",
-			"{{Person Name}}": currentUser.displayName || "Femi",
+			"{{Person Name}}": currentUser?.displayName || "Femi",
 		};
 
 		// Replace all placeholders with their corresponding replacements

@@ -12,7 +12,7 @@ import AddProducts from "../admin/AddProducts";
 import AllProducts from "../admin/AllProducts";
 import Dashboard from "../admin/Dashboard";
 import Users from "../admin/Users";
-import SettingsPage from "../pages/Settings";
+import SettingsPage from "../pages/settings";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 
 //  I define the Routers component

@@ -190,15 +190,5 @@ if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))  
     app.run(debug=False, host='0.0.0.0', port=port)
     
-    
-# build and deploy server code
-## gcloud builds submit --tag gcr.io/gadgetcoback/gadgetba
-
-## gcloud run deploy --image gcr.io/gadgetcoback/gadgetba --platform managed
-
-# server test code
-# curl -X POST https://server-4tvhbvwe7q-ew.a.run.app/get -H "Content-Type: application/json" -d "{\"message\": \"hello\"}"
-# curl -X POST "https://server-4tvhbvwe7q-ew.a.run.app/feedback" -H "Content-Type: application/json" -d "{\"message\": \"Hi there\", \"response\": \"Hello, how can I help?\", \"sentiment\": \"positive\", \"source\": \"AI Model\"}"
-
 
 
