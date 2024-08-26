@@ -30,6 +30,6 @@ To install the React e-commerce application, follow these steps:
    `cd oo158/ecom-webapp-frontend`
    `npm start`
 
-3. Running the Backend web Application
+3. Running the Backend server
    `cd oo158/ecom-webapp-backend`
    `python app.py`
