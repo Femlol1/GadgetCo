@@ -100,10 +100,8 @@ def get_response(intents_list, intents_json, message):
         source = 'Hardcoded'  # Indicates the response was hardcoded
         print("Response source:", source)  # Debug statement
         return response, source
-    if not intents_list or intents_list[0]['probability'] < ERROR_THRESHOLD:
-        print("Fallback to GPT-3, insufficient confidence.")  #indicates responce came from gpt
-        response, source = get_gpt3_response(message)
-    else:
+    
+    if intents_list:
         tag = intents_list[0]['intent']
         responses = [i['responses'] for i in intents_json['intents'] if i['tag'] == tag][0]
         if sentiment < -0.5:
@@ -114,8 +112,13 @@ def get_response(intents_list, intents_json, message):
             response = random.choice(responses)
             source = 'AI Model'  # Indicates the response came from my model
         print("Model understands query.")  # Debug statement
-    print("Response source:", source)  # Debug statement
-    return response, source
+        print("Response source:", source)  # Debug statement
+        return response, source
+    else:
+        response = "I am sorry I don't understand , can you rephrase it"
+        source = 'Hardcoded'  # Indicates the response was hardcoded
+        print("Response source:", source)  # Debug statement
+        return response, source
 
 def get_gpt3_response(message, chat_log=None):
     openai.api_key = os.getenv("OPENAI_API_KEY")
