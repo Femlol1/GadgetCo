@@ -23,7 +23,7 @@ To install the React e-commerce application, follow these steps:
 
 1. Clone the repository:
 
-   git clone https://campus.cs.le.ac.uk/gitlab/ug_project/23-24/oo158.git
+   git clone https://github.com/Femlol1/GadgetCo.git
 
 2. Running the Frontend web Application
 
