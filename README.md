@@ -2,6 +2,7 @@
 
 This project is a React-based e-commerce application integrated with an AI-powered chatbot for enhancing customer service. The chatbot is designed to handle inquiries automatically using natural language processing to provide a seamless shopping experience for users.
 
+View website at https://gadgetco-3794d.web.app/
 ## Features
 
 - Product Browsing: Users can filter, view and search for products.
